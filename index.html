@@ -15,11 +15,10 @@
        HERO — FIXED SPACING + ROTATING TEXT
     ============================================= */
     .hero {
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 120px 0 80px;
+      align-items: center;
+      padding-top: 64px; /* offset for fixed header */
       position: relative;
       overflow: hidden;
     }
@@ -33,34 +32,35 @@
 
     /* Rotating words above the name */
     .hero-rotating-wrap {
-      height: 28px;
+      height: 20px;
       overflow: hidden;
       margin-bottom: 24px;
+      position: relative;
     }
 
-    .hero-rotating-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      animation: rotateWords 6s steps(1) infinite;
-    }
-
-    .hero-rotating-list li {
+    .hero-rotating-word {
+      position: absolute;
+      top: 0;
+      left: 0;
       font-family: 'DM Mono', monospace;
       font-size: 11px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
-      height: 28px;
-      display: flex;
-      align-items: center;
+      opacity: 0;
+      transform: translateY(10px);
     }
 
-    @keyframes rotateWords {
-      0%   { transform: translateY(0); }
-      33%  { transform: translateY(-28px); }
-      66%  { transform: translateY(-56px); }
-      100% { transform: translateY(0); }
+    .hero-rotating-word.active {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .hero-rotating-word.exit {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     .hero-name {
@@ -114,7 +114,7 @@
        WORK LIST — HOVER REVEAL STYLE
     ============================================= */
     .work-section {
-      padding: 80px 0 120px;
+      padding: 48px 0 120px;
     }
 
     .work-list {
@@ -338,11 +338,10 @@
 
       <!-- ROTATING WORDS -->
       <div class="hero-rotating-wrap" aria-hidden="true">
-        <ul class="hero-rotating-list">
-          <li>Creative Direction</li>
-          <li>Luxury &amp; Automotive</li>
-          <li>Campaign &amp; Advertising</li>
-        </ul>
+        <span class="hero-rotating-word active">Creative Direction</span>
+        <span class="hero-rotating-word">Luxury &amp; Automotive</span>
+        <span class="hero-rotating-word">Brand Identity</span>
+        <span class="hero-rotating-word">Event &amp; Experiential</span>
       </div>
 
       <!-- NAME -->
@@ -571,6 +570,24 @@
   </footer>
 
   <script>
+    // =============================================
+    // ROTATING HERO WORDS
+    // =============================================
+    const words = document.querySelectorAll('.hero-rotating-word');
+    let current = 0;
+
+    setInterval(() => {
+      words[current].classList.remove('active');
+      words[current].classList.add('exit');
+
+      setTimeout(() => {
+        words[current].classList.remove('exit');
+        current = (current + 1) % words.length;
+        words[current].classList.add('active');
+      }, 400);
+
+    }, 2200);
+
     // =============================================
     // FILTER
     // =============================================
