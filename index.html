@@ -9,13 +9,317 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+
+    /* =============================================
+       HERO — FIXED SPACING + ROTATING TEXT
+    ============================================= */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      padding: 0 32px;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Rotating words above the name */
+    .hero-rotating-wrap {
+      height: 28px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .hero-rotating-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      animation: rotateWords 6s steps(1) infinite;
+    }
+
+    .hero-rotating-list li {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      height: 28px;
+      display: flex;
+      align-items: center;
+    }
+
+    @keyframes rotateWords {
+      0%   { transform: translateY(0); }
+      33%  { transform: translateY(-28px); }
+      66%  { transform: translateY(-56px); }
+      100% { transform: translateY(0); }
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(64px, 10vw, 130px);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 32px;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-descriptor {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 480px;
+      line-height: 1.7;
+      border-left: 1px solid var(--accent);
+      padding-left: 16px;
+      margin-bottom: 48px;
+    }
+
+    .hero-scroll {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--text-secondary);
+    }
+
+    /* =============================================
+       WORK LIST — HOVER REVEAL STYLE
+    ============================================= */
+    .work-section {
+      padding: 80px 0 120px;
+    }
+
+    .work-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .work-list-item {
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .work-list-link {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 32px;
+      padding: 28px 0;
+      cursor: pointer;
+      text-decoration: none;
+      transition: padding 0.3s ease;
+      position: relative;
+    }
+
+    .work-list-link:hover {
+      padding: 28px 16px;
+    }
+
+    /* Hover background fill */
+    .work-list-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--surface);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 0;
+    }
+
+    .work-list-link:hover::before {
+      transform: scaleX(1);
+    }
+
+    .work-list-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .work-list-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--text-secondary);
+      width: 28px;
+      flex-shrink: 0;
+    }
+
+    .work-list-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1;
+      transition: color 0.25s ease;
+      letter-spacing: -0.01em;
+    }
+
+    .work-list-link:hover .work-list-title {
+      color: var(--accent);
+    }
+
+    .work-list-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .work-list-cat {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-align: right;
+    }
+
+    /* Hover image preview */
+    .work-list-preview {
+      position: fixed;
+      width: 320px;
+      height: 200px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 999;
+      border-radius: 2px;
+      overflow: hidden;
+      transform: translate(-50%, -50%);
+    }
+
+    .work-list-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .work-list-preview.visible {
+      opacity: 1;
+    }
+
+    /* Arrow indicator */
+    .work-list-arrow {
+      font-size: 18px;
+      color: var(--text-secondary);
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .work-list-link:hover .work-list-arrow {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .filter-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+    }
+
+    .filter-btn.active {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .work-list-item.hidden {
+      display: none;
+    }
+
+    /* Section header */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 32px;
+      margin-bottom: 40px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 768px) {
+      .hero-name { font-size: clamp(48px, 14vw, 80px); }
+
+      .work-list-right { gap: 16px; }
+      .work-list-cat { display: none; }
+      .work-list-title { font-size: clamp(22px, 7vw, 36px); }
+      .work-list-preview { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-inner { padding: 0 20px; }
+    }
+
+  </style>
 </head>
 <body>
+
+  <!-- FLOATING IMAGE PREVIEW -->
+  <div class="work-list-preview" id="workPreview">
+    <img id="workPreviewImg" src="" alt="">
+  </div>
 
   <!-- HEADER -->
   <header class="site-header">
     <a href="index.html" class="nav-logo">
-      <!-- Replace src with your actual logo file path -->
       <img src="assets/images/edp-logo.png" alt="EDP monogram">
       <span class="nav-logo-text">Emerson De Pasion</span>
     </a>
@@ -30,15 +334,30 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-line" aria-hidden="true"></div>
-    <div class="container">
-      <p class="hero-eyebrow">Senior Creative Director</p>
-      <h1 class="hero-name">Emerson<br><em>De Pasion</em></h1>
+    <div class="hero-inner">
+
+      <!-- ROTATING WORDS -->
+      <div class="hero-rotating-wrap" aria-hidden="true">
+        <ul class="hero-rotating-list">
+          <li>Creative Direction</li>
+          <li>Luxury &amp; Automotive</li>
+          <li>Campaign &amp; Advertising</li>
+        </ul>
+      </div>
+
+      <!-- NAME -->
+      <h1 class="hero-name">
+        Emerson
+        <em>De Pasion</em>
+      </h1>
+
+      <!-- DESCRIPTOR -->
       <p class="hero-descriptor">
-        Senior Creative Director across advertising, brand identity,<br>
-        luxury automotive, and experiential design.<br>
+        Senior Creative Director across advertising, brand identity,
+        luxury automotive, and experiential design.
         Philippines and Cambodia.
       </p>
+
       <span class="hero-scroll" aria-hidden="true">Scroll to work</span>
     </div>
   </section>
@@ -48,7 +367,7 @@
     <div class="container">
 
       <div class="section-header">
-        <span class="section-number t-accent">01</span>
+        <span class="t-accent">01</span>
         <h2 class="t-subheading">Selected Work</h2>
       </div>
 
@@ -61,155 +380,179 @@
         <button class="filter-btn" data-filter="experiential">Event &amp; Experiential</button>
       </div>
 
-      <!-- WORK GRID -->
-      <div class="work-grid" id="workGrid">
+      <!-- WORK LIST -->
+      <ul class="work-list" id="workList">
 
-        <!-- CARD 01 — McLaren Elva -->
-        <article class="work-card" data-category="luxury" onclick="window.location='project.html?id=mclaren-elva'">
-          <div class="work-card-img">
-            <img src="assets/images/mclaren-elva-main.jpg" alt="McLaren Elva campaign">
-          </div>
-          <div class="work-card-body">
-            <p class="work-card-cat">Luxury &amp; Automotive</p>
-            <h3 class="work-card-title">McLaren Elva</h3>
-            <p class="work-card-client">McLaren Phnom Penh — 2021</p>
-          </div>
-        </article>
+        <li class="work-list-item" data-category="luxury">
+          <a class="work-list-link" href="project.html"
+             data-img="assets/images/mclaren-elva-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">01</span>
+              <span class="work-list-title">McLaren Elva</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Luxury &amp; Automotive — 2021</span>
+              <span class="work-list-arrow">→</span>
+            </div>
+          </a>
+        </li>
 
-        <!-- CARD 02 — G-Shock Shock the World -->
-        <article class="work-card" data-category="experiential" onclick="window.location='project.html?id=gshock'">
-          <div class="work-card-img">
-            <img src="assets/images/gshock-stage.jpg" alt="G-Shock Shock the World">
-          </div>
-          <div class="work-card-body">
-            <p class="work-card-cat">Event &amp; Experiential</p>
-            <h3 class="work-card-title">G-Shock Shock the World</h3>
-            <p class="work-card-client">Casio G-Shock — Phnom Penh</p>
-          </div>
-        </article>
+        <li class="work-list-item" data-category="experiential">
+          <a class="work-list-link" href="project.html"
+             data-img="assets/images/gshock-stage.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">02</span>
+              <span class="work-list-title">G-Shock Shock the World</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Event &amp; Experiential</span>
+              <span class="work-list-arrow">→</span>
+            </div>
+          </a>
+        </li>
 
-        <!-- CARD 03 — Aston Martin DBS -->
-        <article class="work-card" data-category="luxury" onclick="window.location='project.html?id=aston-martin'">
-          <div class="work-card-img">
-            <img src="assets/images/aston-martin-main.jpg" alt="Aston Martin DBS Superleggera">
-          </div>
-          <div class="work-card-body">
-            <p class="work-card-cat">Luxury &amp; Automotive</p>
-            <h3 class="work-card-title">Aston Martin DBS Superleggera</h3>
-            <p class="work-card-client">Aston Martin Phnom Penh — 2021</p>
-          </div>
-        </article>
+        <li class="work-list-item" data-category="luxury">
+          <a class="work-list-link" href="project.html"
+             data-img="assets/images/aston-martin-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">03</span>
+              <span class="work-list-title">Aston Martin DBS Superleggera</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Luxury &amp; Automotive — 2021</span>
+              <span class="work-list-arrow">→</span>
+            </div>
+          </a>
+        </li>
 
-        <!-- CARD 04 — Breathe Brand Identity -->
-        <article class="work-card" data-category="identity" onclick="window.location='project.html?id=breathe'">
-          <div class="work-card-img">
-            <img src="assets/images/breathe-identity-main.jpg" alt="Breathe brand identity system">
-          </div>
-          <div class="work-card-body">
-            <p class="work-card-cat">Brand Identity</p>
-            <h3 class="work-card-title">Breathe</h3>
-            <p class="work-card-client">Brand Identity System</p>
-          </div>
-        </article>
+        <li class="work-list-item" data-category="identity">
+          <a class="work-list-link" href="project.html"
+             data-img="assets/images/breathe-identity-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">04</span>
+              <span class="work-list-title">Breathe</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Brand Identity</span>
+              <span class="work-list-arrow">→</span>
+            </div>
+          </a>
+        </li>
 
-        <!-- CARD 05 — Tiger Beer -->
-        <article class="work-card" data-category="campaign" onclick="window.location='project.html?id=tiger'">
-          <div class="work-card-img">
-            <img src="assets/images/tiger-beer-main.jpg" alt="Tiger Beer Uncage Your Tiger campaign">
-          </div>
-          <div class="work-card-body">
-            <p class="work-card-cat">Campaign &amp; Advertising</p>
-            <h3 class="work-card-title">Tiger Beer — Uncage Your Tiger</h3>
-            <p class="work-card-client">Tiger Beer Cambodia</p>
-          </div>
-        </article>
+        <li class="work-list-item" data-category="campaign">
+          <a class="work-list-link" href="project.html"
+             data-img="assets/images/tiger-beer-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">05</span>
+              <span class="work-list-title">Tiger Beer — Uncage Your Tiger</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Campaign &amp; Advertising</span>
+              <span class="work-list-arrow">→</span>
+            </div>
+          </a>
+        </li>
 
-        <!-- CARD 06 — BMW 4 Series -->
-        <article class="work-card" data-category="luxury" onclick="window.location='project.html?id=bmw'">
-          <div class="work-card-img">
-            <img src="assets/images/bmw-4series-main.jpg" alt="BMW 4 Series experiential">
-          </div>
-          <div class="work-card-body">
-            <p class="work-card-cat">Luxury &amp; Automotive</p>
-            <h3 class="work-card-title">BMW 4 Series Coupé</h3>
-            <p class="work-card-client">BMW Phnom Penh — 2022</p>
-          </div>
-        </article>
+        <li class="work-list-item" data-category="luxury">
+          <a class="work-list-link" href="project.html"
+             data-img="assets/images/bmw-4series-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">06</span>
+              <span class="work-list-title">BMW 4 Series Coupé</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Luxury &amp; Automotive — 2022</span>
+              <span class="work-list-arrow">→</span>
+            </div>
+          </a>
+        </li>
 
-        <!-- CARD 07 — KitKat -->
-        <article class="work-card" data-category="campaign" onclick="window.location='project.html?id=kitkat'">
-          <div class="work-card-img">
-            <img src="assets/images/kitkat-seasonal.jpg" alt="KitKat Have a Break campaign">
-          </div>
-          <div class="work-card-body">
-            <p class="work-card-cat">Campaign &amp; Advertising</p>
-            <h3 class="work-card-title">KitKat — Have a Break</h3>
-            <p class="work-card-client">Nestlé Cambodia</p>
-          </div>
-        </article>
+        <li class="work-list-item" data-category="campaign">
+          <a class="work-list-link" href="project.html"
+             data-img="assets/images/kitkat-seasonal.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">07</span>
+              <span class="work-list-title">KitKat — Have a Break</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Campaign &amp; Advertising</span>
+              <span class="work-list-arrow">→</span>
+            </div>
+          </a>
+        </li>
 
-        <!-- CARD 08 — Hanuman Lite -->
-        <article class="work-card" data-category="campaign" onclick="window.location='project.html?id=hanuman'">
-          <div class="work-card-img">
-            <img src="assets/images/hanuman-lite-main.jpg" alt="Hanuman Lite Greatest Moments campaign">
-          </div>
-          <div class="work-card-body">
-            <p class="work-card-cat">Campaign &amp; Advertising</p>
-            <h3 class="work-card-title">Hanuman Lite — Greatest Moments</h3>
-            <p class="work-card-client">Hanuman Capitals</p>
-          </div>
-        </article>
+        <li class="work-list-item" data-category="campaign">
+          <a class="work-list-link" href="project.html"
+             data-img="assets/images/hanuman-lite-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">08</span>
+              <span class="work-list-title">Hanuman Lite — Greatest Moments</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Campaign &amp; Advertising</span>
+              <span class="work-list-arrow">→</span>
+            </div>
+          </a>
+        </li>
 
-        <!-- CARD 09 — Dragon Land -->
-        <article class="work-card" data-category="experiential" onclick="window.location='project.html?id=dragonland'">
-          <div class="work-card-img">
-            <img src="assets/images/dragon-land-main.jpg" alt="Dragon Elite Villa Exhibition">
-          </div>
-          <div class="work-card-body">
-            <p class="work-card-cat">Event &amp; Experiential</p>
-            <h3 class="work-card-title">Dragon Elite Villa Exhibition</h3>
-            <p class="work-card-client">Dragon Land — 2022</p>
-          </div>
-        </article>
+        <li class="work-list-item" data-category="experiential">
+          <a class="work-list-link" href="project.html"
+             data-img="assets/images/dragon-land-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">09</span>
+              <span class="work-list-title">Dragon Elite Villa Exhibition</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Event &amp; Experiential — 2022</span>
+              <span class="work-list-arrow">→</span>
+            </div>
+          </a>
+        </li>
 
-        <!-- CARD 10 — CamID -->
-        <article class="work-card" data-category="campaign" onclick="window.location='project.html?id=camid'">
-          <div class="work-card-img">
-            <img src="assets/images/camid-seasonal.jpg" alt="CamID campaign series">
-          </div>
-          <div class="work-card-body">
-            <p class="work-card-cat">Campaign &amp; Advertising</p>
-            <h3 class="work-card-title">CamID — Campaign Series</h3>
-            <p class="work-card-client">CamID Cambodia</p>
-          </div>
-        </article>
+        <li class="work-list-item" data-category="campaign">
+          <a class="work-list-link" href="project.html"
+             data-img="assets/images/camid-seasonal.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">10</span>
+              <span class="work-list-title">CamID — Campaign Series</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Campaign &amp; Advertising</span>
+              <span class="work-list-arrow">→</span>
+            </div>
+          </a>
+        </li>
 
-        <!-- CARD 11 — Bong Tees -->
-        <article class="work-card" data-category="identity" onclick="window.location='project.html?id=bongtees'">
-          <div class="work-card-img">
-            <img src="assets/images/bongtees-identity.jpg" alt="Bong Tees brand identity">
-          </div>
-          <div class="work-card-body">
-            <p class="work-card-cat">Brand Identity</p>
-            <h3 class="work-card-title">Bong Tees / Just Slightly Offensive</h3>
-            <p class="work-card-client">Brand Identity &amp; Apparel</p>
-          </div>
-        </article>
+        <li class="work-list-item" data-category="identity">
+          <a class="work-list-link" href="project.html"
+             data-img="assets/images/bongtees-identity.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">11</span>
+              <span class="work-list-title">Bong Tees / Just Slightly Offensive</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Brand Identity</span>
+              <span class="work-list-arrow">→</span>
+            </div>
+          </a>
+        </li>
 
-        <!-- CARD 12 — Heineken Silver -->
-        <article class="work-card" data-category="campaign" onclick="window.location='project.html?id=heineken'">
-          <div class="work-card-img">
-            <img src="assets/images/heineken-silver-edm.jpg" alt="Heineken Silver EDM Nights">
-          </div>
-          <div class="work-card-body">
-            <p class="work-card-cat">Campaign &amp; Advertising</p>
-            <h3 class="work-card-title">Heineken Silver — EDM Nights</h3>
-            <p class="work-card-client">Heineken Cambodia</p>
-          </div>
-        </article>
+        <li class="work-list-item" data-category="campaign">
+          <a class="work-list-link" href="project.html"
+             data-img="assets/images/heineken-silver-edm.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">12</span>
+              <span class="work-list-title">Heineken Silver — EDM Nights</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Campaign &amp; Advertising</span>
+              <span class="work-list-arrow">→</span>
+            </div>
+          </a>
+        </li>
 
-      </div><!-- /work-grid -->
-    </div><!-- /container -->
+      </ul>
+    </div>
   </section>
 
   <!-- CONTACT -->
@@ -227,25 +570,54 @@
     <span class="footer-copy">&copy; 2026 Emerson De Pasion. Phnom Penh, Cambodia.</span>
   </footer>
 
-  <!-- FILTER SCRIPT -->
   <script>
+    // =============================================
+    // FILTER
+    // =============================================
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const workCards = document.querySelectorAll('.work-card');
+    const workItems  = document.querySelectorAll('.work-list-item');
 
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
         const filter = btn.dataset.filter;
-
-        workCards.forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
-            card.classList.remove('hidden');
-          } else {
-            card.classList.add('hidden');
+        workItems.forEach(item => {
+          item.classList.toggle('hidden',
+            filter !== 'all' && item.dataset.category !== filter);
+        });
+        // Re-number visible items
+        let n = 1;
+        workItems.forEach(item => {
+          if (!item.classList.contains('hidden')) {
+            item.querySelector('.work-list-num').textContent =
+              String(n++).padStart(2, '0');
           }
         });
+      });
+    });
+
+    // =============================================
+    // HOVER IMAGE PREVIEW — follows cursor
+    // =============================================
+    const preview    = document.getElementById('workPreview');
+    const previewImg = document.getElementById('workPreviewImg');
+
+    document.querySelectorAll('.work-list-link').forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        const src = link.dataset.img;
+        if (!src) return;
+        previewImg.src = src;
+        preview.classList.add('visible');
+      });
+
+      link.addEventListener('mousemove', e => {
+        preview.style.left = e.clientX + 'px';
+        preview.style.top  = e.clientY + 'px';
+      });
+
+      link.addEventListener('mouseleave', () => {
+        preview.classList.remove('visible');
       });
     });
   </script>
