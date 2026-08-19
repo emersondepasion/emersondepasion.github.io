@@ -58,39 +58,53 @@
       width: 100%;
     }
 
-    /* ESE-style horizontal words — spread across bottom of hero */
-    .hero-words {
+    /* big rolling discipline strip — overlaid across bottom of hero */
+    .hero-marquee {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 28px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      overflow: hidden;
       z-index: 2;
       border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 18px 0;
+      pointer-events: none;
     }
 
-    .hero-word {
+    .hero-marquee-track {
+      display: flex;
+      width: max-content;
+      animation: heroMarqueeScroll 42s linear infinite;
+    }
+
+    .hero-marquee-group {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .hero-marquee-item {
       font-family: 'DM Sans', sans-serif;
-      font-size: clamp(14px, 1.5vw, 20px);
+      font-size: clamp(40px, 7vw, 108px);
       font-weight: 300;
-      letter-spacing: 0.02em;
-      color: var(--text-secondary);
-      opacity: 0;
-      transform: translateY(12px);
-      animation: wordReveal 0.7s ease forwards;
+      letter-spacing: -0.01em;
+      color: #7A2020;
+      opacity: 0.55;
       text-transform: lowercase;
+      white-space: nowrap;
+      padding: 0 28px;
     }
 
-    .hero-word:nth-child(1) { animation-delay: 0.3s; text-align: left; }
-    .hero-word:nth-child(2) { animation-delay: 0.5s; text-align: center; }
-    .hero-word:nth-child(3) { animation-delay: 0.7s; text-align: right; }
+    .hero-marquee-dot {
+      color: var(--accent);
+      opacity: 0.4;
+      font-size: clamp(24px, 4vw, 60px);
+      flex-shrink: 0;
+    }
 
-    @keyframes wordReveal {
-      0%   { opacity: 0; transform: translateY(12px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @keyframes heroMarqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
 
     .hero-name {
@@ -419,11 +433,38 @@
   <section class="hero">
     <div class="hero-bg" style="background-image: url('assets/images/bg-texture.jpg');"></div>
     <div class="hero-seal" style="background-image: url('assets/images/edp-logo-bg.png');"></div>
-    <!-- ESE-style horizontal words at bottom of hero -->
-    <div class="hero-words" aria-hidden="true">
-      <span class="hero-word">creative direction</span>
-      <span class="hero-word">luxury &amp; automotive</span>
-      <span class="hero-word">brand identity</span>
+    <!-- big rolling discipline strip across bottom of hero -->
+    <div class="hero-marquee" aria-hidden="true">
+      <div class="hero-marquee-track">
+        <div class="hero-marquee-group">
+          <span class="hero-marquee-item">creative direction</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">campaign &amp; advertising</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">brand identity</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">event &amp; experiential</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">digital</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">philippines &amp; cambodia</span>
+          <span class="hero-marquee-dot">·</span>
+        </div>
+        <div class="hero-marquee-group">
+          <span class="hero-marquee-item">creative direction</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">campaign &amp; advertising</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">brand identity</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">event &amp; experiential</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">digital</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">philippines &amp; cambodia</span>
+          <span class="hero-marquee-dot">·</span>
+        </div>
+      </div>
     </div>
 
     <div class="hero-inner">
