@@ -18,16 +18,19 @@
       height: 100vh;
       display: flex;
       align-items: center;
-      padding-top: 64px;
       position: relative;
       overflow: hidden;
+    }
+
+    /* offset nav height so content is truly centred */
+    .hero-inner {
+      margin-top: -32px;
     }
 
     /* bg texture — full bleed at low opacity */
     .hero-bg {
       position: absolute;
       inset: 0;
-      background-image: url('assets/images/bg 1.png');
       background-size: cover;
       background-position: center;
       opacity: 0.18;
@@ -42,10 +45,9 @@
       transform: translateY(-50%);
       width: clamp(420px, 55vw, 780px);
       aspect-ratio: 1;
-      background-image: url('assets/images/edp-logo-bg.png');
       background-size: cover;
       background-position: center;
-      opacity: 0.07;
+      opacity: 0.08;
       z-index: 0;
       pointer-events: none;
     }
@@ -55,15 +57,15 @@
       z-index: 1;
       padding: 0 32px;
       max-width: 1280px;
-      margin: 0 auto;
+      margin: -32px auto 0;
       width: 100%;
     }
 
-    /* Stacked descriptor words — all visible on load, stagger in */
+    /* Stacked descriptor words — ALL visible simultaneously, stagger in and STAY */
     .hero-words {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 4px;
       margin-bottom: 24px;
     }
 
@@ -76,14 +78,16 @@
       opacity: 0;
       transform: translateY(8px);
       animation: wordReveal 0.5s ease forwards;
+      /* animation-fill-mode: forwards ensures they stay visible */
     }
 
     .hero-word:nth-child(1) { animation-delay: 0.1s; }
-    .hero-word:nth-child(2) { animation-delay: 0.25s; }
-    .hero-word:nth-child(3) { animation-delay: 0.4s; }
+    .hero-word:nth-child(2) { animation-delay: 0.3s; }
+    .hero-word:nth-child(3) { animation-delay: 0.5s; }
 
     @keyframes wordReveal {
-      to { opacity: 1; transform: translateY(0); }
+      0%   { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     .hero-name {
@@ -430,8 +434,8 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-seal"></div>
+    <div class="hero-bg" style="background-image: url('assets/images/bg%201.png');"></div>
+    <div class="hero-seal" style="background-image: url('assets/images/edp-logo-bg.png');"></div>
     <div class="hero-inner">
 
       <!-- stacked words — all visible, stagger in on load -->
