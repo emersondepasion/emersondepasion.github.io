@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bong Tees / Just Slightly Offensive — Emerson De Pasion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .project-hero {
+      padding-top: 80px;
+      width: 100%;
+      aspect-ratio: 16/7;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .project-hero img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .project-body { padding: 48px 0 120px; }
+    .case-meta-bar {
+      display: flex;
+      gap: 48px;
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 32px 0 40px;
+      flex-wrap: wrap;
+    }
+    .case-meta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+    .case-meta-value {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-primary);
+    }
+    .case-description {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      max-width: 680px;
+      margin-bottom: 64px;
+    }
+    .gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-bottom: 80px; }
+    .gallery-img { grid-column: span 12; overflow: hidden; border-radius: 2px; background: var(--surface); }
+    .gallery-img.half { grid-column: span 6; }
+    .gallery-img.third { grid-column: span 4; }
+    .gallery-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .nav-back {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 32px 0 40px;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .nav-back:hover { color: var(--accent); }
+    .nav-back::before { content: "←"; font-size: 14px; }
+    .next-project {
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .next-project-link {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 3vw, 32px);
+      font-weight: 300;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: color 0.25s ease;
+    }
+    .next-project-link:hover { color: var(--accent); }
+    .next-project-link span { color: var(--accent); }
+    @media (max-width: 768px) {
+      .gallery-img.half, .gallery-img.third { grid-column: span 12; }
+      .case-meta-bar { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/images/edp-logo.png" alt="EDP monogram">
+      <span class="nav-logo-text">Emerson De Pasion</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="../index.html">Work</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="mailto:emersondepasion@gmail.com">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="project-hero">
+    <img src="../assets/images/bongtees-brand-guide-01.jpg" alt="Bong Tees / Just Slightly Offensive">
+  </div>
+
+  <div class="project-body">
+    <div class="container">
+      <a href="../index.html" class="nav-back">Back to work</a>
+      <h1 class="t-heading" style="margin-bottom: 8px;">Bong Tees / Just Slightly Offensive</h1>
+
+      <div class="case-meta-bar">
+        <div>
+          <p class="case-meta-label">Category</p>
+          <p class="case-meta-value">Brand Identity</p>
+        </div>
+        <div>
+          <p class="case-meta-label">Client</p>
+          <p class="case-meta-value">Bong Tees</p>
+        </div>
+        <div>
+          <p class="case-meta-label">Year</p>
+          <p class="case-meta-value">2020</p>
+        </div>
+        <div>
+          <p class="case-meta-label">Role</p>
+          <p class="case-meta-value">Senior Creative Director</p>
+        </div>
+      </div>
+
+      <p class="case-description">Brand identity and apparel design for Bong Tees and its sub-brand Just Slightly Offensive. Logo system, brand guide, t-shirt graphic design, and seasonal campaign content.</p>
+
+      <div class="gallery">
+        <div class="gallery-img"><img src="../assets/images/bongtees-brand-guide-01.jpg" alt=""></div>
+        <div class="gallery-img half"><img src="../assets/images/bongtees-brand-guide-03.jpg" alt=""></div>
+        <div class="gallery-img half"><img src="../assets/images/bongtees-brand-guide-04.jpg" alt=""></div>
+        <div class="gallery-img"><img src="../assets/images/bongtees-tshirt-drunk.jpg" alt=""></div>
+      </div>
+
+      <div class="next-project">
+        <span class="t-meta">Next project</span>
+        <a href="brand-logos.html" class="next-project-link">Logo & Brand Mark Collection <span>→</span></a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-tagline">Eternum Designum Praevalet</span>
+    <span class="footer-copy">&copy; 2026 Emerson De Pasion. Phnom Penh, Cambodia.</span>
+  </footer>
+</body>
+</html>
