@@ -12,13 +12,14 @@
     .project-hero {
       padding-top: 80px;
       width: 100%;
-      aspect-ratio: 16/7;
-      overflow: hidden;
       background: var(--surface);
     }
     .project-hero img {
-      width: 100%; height: 100%;
-      object-fit: cover;
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      max-height: 80vh;
     }
     .project-body { padding: 48px 0 120px; }
     .case-meta-bar {
@@ -54,10 +55,10 @@
       margin-bottom: 64px;
     }
     .gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-bottom: 80px; }
-    .gallery-img { grid-column: span 12; overflow: hidden; border-radius: 2px; background: var(--surface); }
+    .gallery-img { grid-column: span 12; border-radius: 2px; background: var(--surface); }
     .gallery-img.half { grid-column: span 6; }
     .gallery-img.third { grid-column: span 4; }
-    .gallery-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-img img { width: 100%; height: auto; display: block; object-fit: contain; }
     .nav-back {
       font-family: 'DM Mono', monospace;
       font-size: 11px;
@@ -115,7 +116,7 @@
   </header>
 
   <div class="project-hero">
-    <img src="../assets/images/sinn-watches.jpg" alt="Sinn Watches">
+    <img src="../assets/images/sinn-watch-store-window-sticker-all.jpg" alt="Sinn Watches">
   </div>
 
   <div class="project-body">
@@ -145,7 +146,8 @@
       <p class="case-description">Campaign creative for Sinn Watches at Segnatempo, covering the 900 Pilot and 757 Diapal collections. Art direction, print ads, and retail display design.</p>
 
       <div class="gallery">
-        <div class="gallery-img"><img src="../assets/images/sinn-watches.jpg" alt=""></div>
+        <div class="gallery-img"><img src="../assets/images/sinn-watch-store-window-sticker-all.jpg" alt=""></div>
+        <div class="gallery-img half"><img src="../assets/images/sinn-watch-store-window-sticker-02.jpg" alt=""></div>
       </div>
 
       <div class="next-project">
