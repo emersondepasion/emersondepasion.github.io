@@ -3,106 +3,217 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About Emerson De Pasion — Senior Creative Director based in Phnom Penh, Cambodia.">
+  <meta name="description" content="About Emerson De Pasion — Creative Professional based in Phnom Penh, Cambodia.">
   <title>About — Emerson De Pasion</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    :root{
+      --font: 'Inter', sans-serif;
+      --accent: #FF462E;
+    }
+    * { font-family: var(--font); }
+
+    @font-face{
+      font-family: 'Moderniz';
+      src: url('assets/fonts/Moderniz.otf') format('opentype');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    .nav-logo-text{ font-family: 'Moderniz', var(--font); }
+
+    .site-header{ background: rgba(255,255,255,.92); border-bottom-color: rgba(0,0,0,.08); }
+    .nav-logo-text{ color:#121212; }
+    .nav-links a{ color:#6B6B66; }
+    .nav-links a:hover, .nav-links a.active{ color: var(--accent); border-bottom-color: var(--accent); }
+    .nav-logo img{ width:68px; height:68px; border:none; padding:0; }
+
+    body{
+      --ground: #FFFFFF;
+      --surface: #F3F2EF;
+      --surface-2: #EAE8E3;
+      --text-primary: #121212;
+      --text-secondary: #6B6B66;
+      --border: rgba(0,0,0,.12);
+      background: var(--ground);
+      color: var(--text-primary);
+    }
+
+
+    section{ position:relative; }
+    .section-inner{ max-width:1280px; margin:0 auto; padding:0 32px; }
+    .section-pad{ padding: 96px 0; }
+
+    .plus-divider{ position:relative; height:1px; background: var(--border); }
+    .plus-divider span{
+      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      background: #FFFFFF; padding:0 12px; font-size:13px; color: var(--text-secondary); line-height:1;
+    }
+    .dot{ width:8px; height:8px; background: var(--accent); flex-shrink:0; display:inline-block; }
+
+    .eyebrow{
+      font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+      color: var(--accent); margin-bottom:20px; display:block;
+    }
+    .pill-tag{ display:inline-flex; align-items:center; gap:6px; background:rgba(255,70,46,.08); color: var(--accent); border-radius:999px; padding:7px 16px; font-size:12px; font-weight:600; margin-bottom:24px; }
+
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; font-size:14px; font-weight:500;
+      padding:6px 22px 6px 6px; border-radius:999px; text-decoration:none;
+      transition: all .25s ease;
+    }
+    .btn-icon{ width:32px; height:32px; border-radius:50%; background: var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0; }
+    .btn-solid{ background: #0D0D0D; color:#fff; }
+    .btn-solid:hover{ opacity:.85; }
+
+    .nav-links a .nav-num{ font-size:9px; vertical-align:super; color: var(--accent); margin-left:2px; }
+
+    /* ===== ABOUT HERO ===== */
+    .about-hero{ padding: 172px 0 64px; background: var(--surface); }
+    .about-heading{
+      font-weight:700; font-size: clamp(36px, 5.5vw, 72px); line-height:1.05; letter-spacing:-0.01em;
+      color: var(--text-primary); max-width:900px;
+    }
+
+    /* ===== BIO + DISCIPLINES ===== */
+    .about-grid{ display:grid; grid-template-columns: 280px 1fr; gap:80px; }
+    .discipline-list{ list-style:none; }
+    .discipline-list li{ font-size:15px; font-weight:500; color: var(--text-primary); padding:14px 0; border-top:1px solid var(--border); }
+    .discipline-list li:last-child{ border-bottom:1px solid var(--border); }
+    .about-contact p, .about-contact a{ display:block; font-size:14px; color: var(--text-secondary); text-decoration:none; margin-bottom:6px; }
+    .about-contact a:hover{ color: var(--accent); }
+
+    .about-bio p{ font-size:16px; line-height:1.85; color: var(--text-secondary); margin-bottom:22px; max-width:680px; }
+    .about-bio strong{ color: var(--text-primary); font-weight:600; }
+    .process-note{ margin-top:40px; background: var(--surface); border-radius:16px; padding:28px 32px; max-width:680px; }
+    .process-note p{ font-size:14px; line-height:1.8; color: var(--text-secondary); margin:0; }
+
+    /* ===== SELECTED CLIENTS ===== */
+    .clients-region-label{ font-size:12px; font-weight:600; color: var(--accent); text-transform:uppercase; letter-spacing:.08em; margin-bottom:20px; }
+    .client-grid{ display:flex; flex-wrap:wrap; gap:12px; margin-bottom:48px; }
+    .client-item{
+      font-size:13px; font-weight:500; color: var(--text-primary);
+      background: var(--surface); border:1px solid var(--border); border-radius:999px;
+      padding:9px 18px;
+    }
+
+    .reveal{ opacity:0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in-view{ opacity:1; transform:none; }
+
+    .back-to-top{
+      position: fixed; right: 32px; bottom: 32px; z-index: 40;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: #0D0D0D; color: #fff; border: none;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; cursor: pointer;
+      opacity: 0; visibility: hidden; transform: translateY(12px);
+      transition: opacity .3s ease, transform .3s ease, visibility .3s ease, background .25s ease;
+    }
+    .back-to-top.visible{ opacity: 1; visibility: visible; transform: none; }
+    .back-to-top:hover{ background: var(--accent); }
+
+    @media (max-width: 900px){
+      .about-grid{ grid-template-columns:1fr; gap:40px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="site-header">
+
+  <header class="site-header" style="position:relative; z-index:5;">
     <a href="index.html" class="nav-logo">
       <img src="assets/images/edp-logo.png" alt="EDP monogram">
       <span class="nav-logo-text">Emerson De Pasion</span>
     </a>
-    <nav>
+    <nav style="display:flex; align-items:center; gap:40px;">
       <ul class="nav-links">
-        <li><a href="index.html">Work</a></li>
-        <li><a href="about.html" class="active">About</a></li>
-        <li><a href="mailto:emersondepasion@gmail.com">Contact</a></li>
+        <li><a href="index.html">Home<span class="nav-num">01</span></a></li>
+        <li><a href="about.html" class="active">About<span class="nav-num">02</span></a></li>
+        <li><a href="index.html#work">Work<span class="nav-num">03</span></a></li>
       </ul>
+      <a href="mailto:emersondepasion@gmail.com" class="btn btn-solid"><span class="btn-icon">&#8594;</span>Get in touch</a>
     </nav>
   </header>
 
   <!-- ABOUT HERO -->
   <section class="about-hero">
-    <div class="container">
-      <p class="t-accent" style="margin-bottom: 16px;">About</p>
-      <h1 class="t-heading">Senior Creative Director.<br>Philippines and Cambodia.</h1>
+    <div class="section-inner">
+      <span class="pill-tag">&#9634; About</span>
+      <h1 class="about-heading reveal">Creative Professional.<br>Philippines and Cambodia.</h1>
     </div>
   </section>
+
+  <div class="plus-divider" style="--pd-bg:#FFFFFF"><span>+</span></div>
 
   <!-- BIO + DISCIPLINES -->
-  <section>
-    <div class="container">
-      <div class="about-grid">
+  <section class="section-pad">
+    <div class="section-inner about-grid">
 
-        <!-- LEFT: DISCIPLINES -->
-        <div>
-          <p class="t-accent" style="margin-bottom: 16px;">Disciplines</p>
-          <ul class="discipline-list">
-            <li>Luxury &amp; Automotive</li>
-            <li>Campaign &amp; Advertising</li>
-            <li>Brand Identity</li>
-            <li>Event &amp; Experiential</li>
-          </ul>
+      <!-- LEFT: DISCIPLINES + CONTACT -->
+      <div class="reveal">
+        <span class="eyebrow">Disciplines</span>
+        <ul class="discipline-list">
+          <li>Luxury &amp; Automotive</li>
+          <li>Campaign &amp; Advertising</li>
+          <li>Brand Identity</li>
+          <li>Event &amp; Experiential</li>
+        </ul>
 
-          <div style="margin-top: 48px;">
-            <p class="t-accent" style="margin-bottom: 16px;">Contact</p>
-            <p class="t-meta" style="margin-bottom: 8px;">Phnom Penh, Cambodia</p>
-            <a href="mailto:emersondepasion@gmail.com" class="contact-link" style="font-size: 12px;">emersondepasion@gmail.com</a>
-            <p class="t-meta" style="margin-top: 8px;">+855 0769 666 258</p>
+        <div style="margin-top:48px;">
+          <span class="eyebrow">Contact</span>
+          <div class="about-contact">
+            <p>Phnom Penh, Cambodia</p>
+            <a href="mailto:emersondepasion@gmail.com">emersondepasion@gmail.com</a>
+            <a href="tel:+8550769666258">+855 0769 666 258</a>
           </div>
         </div>
-
-        <!-- RIGHT: BIO -->
-        <div>
-          <div class="about-bio">
-            <p>
-              Senior Creative Director with extensive experience across the Philippines and Cambodia. 
-              Started at <strong>Workshop One INC.</strong> in Manila in 2000, rising from Graphic Artist 
-              to Creative Director across a 17-year tenure working on accounts including 
-              <strong>Coca-Cola, Globe Telecom, San Miguel Corporation, Apple,</strong> and <strong>Honda Motors.</strong>
-            </p>
-            <p>
-              Relocated to Cambodia in 2018, leading creative for luxury automotive brands including 
-              <strong>McLaren, Aston Martin, Rolls-Royce, BMW,</strong> and <strong>Lamborghini,</strong> 
-              alongside major FMCG and campaign work for <strong>Nestlé, Heineken, Tiger Beer, 
-              G-Shock,</strong> and <strong>Grab.</strong>
-            </p>
-            <p>
-              Currently based in Phnom Penh, available for freelance creative direction, 
-              art direction, and brand identity work.
-            </p>
-          </div>
-
-          <!-- PROCESS NOTE -->
-          <div class="process-note" style="margin-top: 48px;">
-            <p class="t-accent" style="margin-bottom: 12px;">Process</p>
-            <p>
-              AI is used as a research and ideation tool — for concept exploration, reference gathering, 
-              and image generation. All creative direction, layout, and execution is done manually. 
-              The work is always the result of craft, not automation.
-            </p>
-          </div>
-        </div>
-
       </div>
+
+      <!-- RIGHT: BIO -->
+      <div class="reveal">
+        <div class="about-bio">
+          <p>
+            Creative Professional with extensive experience across the Philippines and Cambodia.
+            Started at <strong>Workshop One INC.</strong> in Manila in 2000, rising from Graphic Artist
+            to Creative Director across a 17-year tenure working on accounts including
+            <strong>Coca-Cola, Globe Telecom, San Miguel Corporation, Apple,</strong> and <strong>Honda Motors.</strong>
+          </p>
+          <p>
+            Relocated to Cambodia in 2018, leading creative for luxury automotive brands including
+            <strong>McLaren, Aston Martin, Rolls-Royce, BMW,</strong> and <strong>Lamborghini,</strong>
+            alongside major FMCG and campaign work for <strong>Nestlé, Heineken, Tiger Beer,
+            G-Shock,</strong> and <strong>Grab.</strong>
+          </p>
+          <p>
+            Currently based in Phnom Penh, available for freelance creative direction,
+            art direction, and brand identity work.
+          </p>
+        </div>
+
+        <!-- PROCESS NOTE -->
+        <div class="process-note">
+          <span class="eyebrow" style="margin-bottom:10px;">Process</span>
+          <p>
+            AI is used as a research and ideation tool — for concept exploration, reference gathering,
+            and image generation. All creative direction, layout, and execution is done manually.
+            The work is always the result of craft, not automation.
+          </p>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <div class="divider" style="margin: 0;"></div>
+  <div class="plus-divider" style="--pd-bg:#FFFFFF"><span>+</span></div>
 
-  <!-- CLIENT LIST -->
-  <section style="padding: 64px 0;">
-    <div class="container">
-      <p class="t-accent" style="margin-bottom: 32px;">Selected Clients</p>
+  <!-- SELECTED CLIENTS -->
+  <section class="section-pad" style="padding-top:64px;">
+    <div class="section-inner">
+      <span class="eyebrow reveal">Selected Clients</span>
 
-      <p class="t-meta" style="margin-bottom: 16px; color: var(--accent);">Cambodia</p>
-      <div class="client-grid" style="margin-bottom: 48px;">
+      <p class="clients-region-label reveal">Cambodia</p>
+      <div class="client-grid reveal">
         <div class="client-item">McLaren</div>
         <div class="client-item">Aston Martin</div>
         <div class="client-item">Rolls-Royce</div>
@@ -129,8 +240,8 @@
         <div class="client-item">Danone</div>
       </div>
 
-      <p class="t-meta" style="margin-bottom: 16px; color: var(--accent);">Philippines</p>
-      <div class="client-grid">
+      <p class="clients-region-label reveal">Philippines</p>
+      <div class="client-grid reveal">
         <div class="client-item">Coca-Cola</div>
         <div class="client-item">Globe Telecom</div>
         <div class="client-item">San Miguel</div>
@@ -156,6 +267,25 @@
     <span class="footer-tagline">Eternum Designum Praevalet</span>
     <span class="footer-copy">&copy; 2026 Emerson De Pasion. Phnom Penh, Cambodia.</span>
   </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">&#8593;</button>
+
+  <script>
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in-view'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    (function(){
+      const btn = document.getElementById('backToTop');
+      if(!btn) return;
+      const showAfter = window.innerHeight * 0.6;
+      function toggle(){ btn.classList.toggle('visible', window.scrollY > showAfter); }
+      window.addEventListener('scroll', toggle, { passive:true });
+      toggle();
+      btn.addEventListener('click', ()=> window.scrollTo({ top:0, behavior:'smooth' }));
+    })();
+  </script>
 
 </body>
 </html>

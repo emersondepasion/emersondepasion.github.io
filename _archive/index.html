@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Emerson De Pasion — Senior Creative Director. Advertising, brand identity, luxury automotive, and experiential design across the Philippines and Cambodia.">
+  <title>Emerson De Pasion — Senior Creative Director</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+
+
+    /* bg texture — full bleed at low opacity */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.55;
+      z-index: 0;
+    }
+
+    /* ghost seal — large watermark right side */
+    .hero-seal {
+      position: absolute;
+      right: -6vw;
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(420px, 55vw, 780px);
+      aspect-ratio: 1;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.22;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      z-index: 1;
+      padding: 0 32px;
+      max-width: 1280px;
+      width: 100%;
+    }
+
+    /* big rolling discipline strip — overlaid across bottom of hero */
+    .hero-marquee {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      z-index: 2;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 18px 0;
+      pointer-events: none;
+    }
+
+    .hero-marquee-track {
+      display: flex;
+      width: max-content;
+      animation: heroMarqueeScroll 42s linear infinite;
+    }
+
+    .hero-marquee-group {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .hero-marquee-item {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(40px, 7vw, 108px);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      color: #7A2020;
+      opacity: 0.55;
+      text-transform: lowercase;
+      white-space: nowrap;
+      padding: 0 28px;
+    }
+
+    .hero-marquee-dot {
+      color: var(--accent);
+      opacity: 0.4;
+      font-size: clamp(24px, 4vw, 60px);
+      flex-shrink: 0;
+    }
+
+    @keyframes heroMarqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .hero-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(56px, 9vw, 118px);
+      font-weight: 300;
+      line-height: 0.90;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: nameReveal 0.8s ease 0.55s forwards;
+    }
+
+    .hero-name em {
+      font-style: normal;
+      color: var(--accent);
+      display: block;
+      font-weight: 200;
+    }
+
+    @keyframes nameReveal {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-descriptor {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 480px;
+      line-height: 1.7;
+      border-left: 1px solid var(--accent);
+      padding-left: 16px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: nameReveal 0.6s ease 0.8s forwards;
+    }
+
+    .hero-scroll { display: none !important; visibility: hidden !important; }
+
+    /* =============================================
+       MARQUEE STRIP
+    ============================================= */
+    .marquee-section {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      padding: 14px 0;
+      background: var(--ground);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 28s linear infinite;
+    }
+
+    .marquee-track:hover { animation-play-state: paused; }
+
+    .marquee-group {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .marquee-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      padding: 0 32px;
+      white-space: nowrap;
+    }
+
+    .marquee-dot {
+      color: var(--accent);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* =============================================
+       LOGO MARQUEES — client brands / parent companies
+    ============================================= */
+    .logo-marquee-section {
+      overflow: hidden;
+      background: var(--ground);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-marquee-section--brands { padding: 30px 0; }
+
+    .logo-marquee-section--parents {
+      padding: 20px 0;
+      background: var(--surface);
+    }
+
+    .logo-marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 70s linear infinite;
+    }
+
+    .logo-marquee-section--parents .logo-marquee-track {
+      animation-duration: 52s;
+    }
+
+    .logo-marquee-track:hover { animation-play-state: paused; }
+
+    .logo-marquee-group {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .logo-marquee-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 64px;
+      padding: 0 44px;
+      border-left: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .logo-marquee-section--parents .logo-marquee-item {
+      height: 48px;
+      padding: 0 36px;
+    }
+
+    .logo-marquee-item img {
+      max-height: 32px;
+      max-width: 130px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      opacity: 0.55;
+      transition: opacity 0.25s ease;
+    }
+
+    .logo-marquee-section--parents .logo-marquee-item img {
+      max-height: 24px;
+      max-width: 110px;
+      opacity: 0.4;
+    }
+
+    .logo-marquee-item:hover img { opacity: 1; }
+
+    /* =============================================
+       WORK SECTION
+    ============================================= */
+    .work-section { padding: 64px 0 120px; }
+
+    .work-list {
+      list-style: none;
+      padding: 0; margin: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .work-list-item {
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .work-list-link {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 32px;
+      padding: 20px 0;
+      cursor: pointer;
+      text-decoration: none;
+      transition: padding 0.3s ease;
+      position: relative;
+    }
+
+    .work-list-link:hover { padding: 20px 20px; }
+
+    /* fill sweep on hover */
+    .work-list-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--surface);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      z-index: 0;
+    }
+    .work-list-link:hover::before { transform: scaleX(1); }
+
+    .work-list-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+    }
+
+    .work-list-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--text-secondary);
+      width: 28px;
+      flex-shrink: 0;
+    }
+
+    .work-list-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 3vw, 44px);
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1;
+      transition: color 0.25s ease;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .work-list-link:hover .work-list-title { color: var(--accent); }
+
+    .work-list-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .work-list-cat {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-align: right;
+    }
+
+    /* + icon circle on hover */
+    .work-list-plus {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--text-secondary);
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+      opacity: 0;
+    }
+    .work-list-link:hover .work-list-plus {
+      opacity: 1;
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* cursor-follow logo watermark */
+    .work-preview {
+      position: fixed;
+      width: 56px;
+      height: 56px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      z-index: 90;
+      overflow: hidden;
+      transform: translate(-50%, -50%);
+    }
+    .work-preview img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+    }
+    .work-preview.visible { opacity: 0.16; }
+
+    /* filter */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .filter-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+      z-index: 0;
+    }
+
+    .filter-btn span {
+      position: relative;
+      z-index: 1;
+      transition: color 0.25s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--text-secondary);
+    }
+
+    .filter-btn.active {
+      border-color: var(--accent);
+      color: var(--ground);
+    }
+
+    .filter-btn.active::before { transform: scaleX(1); }
+    .filter-btn.active span { color: var(--ground); }
+
+    .work-list-item.hidden { display: none; }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 32px;
+      margin-bottom: 40px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 768px) {
+      .hero-name { font-size: clamp(48px, 14vw, 80px); }
+      .hero-seal { opacity: 0.05; right: -10vw; width: 80vw; }
+      .work-list-cat { display: none; }
+      .work-preview { display: none; }
+      .work-list-plus { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-inner { padding: 0 20px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- CURSOR FOLLOW LOGO WATERMARK -->
+  <div class="work-preview" id="workPreview">
+    <img id="workPreviewImg" src="assets/images/edp-logo.png" alt="">
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/edp-logo.png" alt="EDP monogram">
+      <span class="nav-logo-text">Emerson De Pasion</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="mailto:emersondepasion@gmail.com">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" style="background-image: url('assets/images/bg-texture.jpg');"></div>
+    <div class="hero-seal" style="background-image: url('assets/images/edp-logo-bg.png');"></div>
+    <!-- big rolling discipline strip across bottom of hero -->
+    <div class="hero-marquee" aria-hidden="true">
+      <div class="hero-marquee-track">
+        <div class="hero-marquee-group">
+          <span class="hero-marquee-item">creative direction</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">campaign &amp; advertising</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">brand identity</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">event &amp; experiential</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">digital</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">philippines &amp; cambodia</span>
+          <span class="hero-marquee-dot">·</span>
+        </div>
+        <div class="hero-marquee-group">
+          <span class="hero-marquee-item">creative direction</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">campaign &amp; advertising</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">brand identity</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">event &amp; experiential</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">digital</span>
+          <span class="hero-marquee-dot">·</span>
+          <span class="hero-marquee-item">philippines &amp; cambodia</span>
+          <span class="hero-marquee-dot">·</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-inner">
+
+      <h1 class="hero-name">
+        Emerson
+        <em>De Pasion</em>
+      </h1>
+
+      <p class="hero-descriptor">
+        Senior Creative Director across advertising, brand identity,
+        luxury automotive, and experiential design.
+        Philippines and Cambodia.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- LOGO MARQUEE — CLIENT BRANDS -->
+  <section class="logo-marquee-section logo-marquee-section--brands" aria-label="Client brands">
+    <div class="logo-marquee-track">
+      <div class="logo-marquee-group">
+          <span class="logo-marquee-item"><img src="assets/images/logos/mclaren.png" alt="McLaren" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/aston-martin.png" alt="Aston Martin" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/lamborghini.png" alt="Lamborghini" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/bmw.png" alt="BMW" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/sinn.png" alt="Sinn" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/hanuman-beverages.png" alt="Hanuman Beverages" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/fine.png" alt="Fine" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/comfort.png" alt="Comfort" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/toyota.png" alt="Toyota" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/hard-rock-cafe.png" alt="Hard Rock Cafe" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/ginsomin.png" alt="Ginsomin" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/tiger-beer.png" alt="Tiger Beer" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/heineken.png" alt="Heineken" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/kitkat.png" alt="KitKat" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/camid.png" alt="CamID" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/grab.png" alt="Grab" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/black-panther-beer.png" alt="Black Panther Beer" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/halls.png" alt="Halls" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/dentyne.png" alt="Dentyne" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/maggi.png" alt="Maggi" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/coca-cola.png" alt="Coca-Cola" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/mega-we-care.png" alt="Mega We Care" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/breathe.png" alt="Breathe Wild" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/bong-tees.png" alt="Bong Tees" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/jso.png" alt="JSO" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/casio.png" alt="Casio" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/dragon-land.png" alt="Dragon Land" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/asean-energy.png" alt="ASEAN Centre for Energy" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/jti.png" alt="JTI" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/pleng.png" alt="Pleng" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/byd.png" alt="BYD" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/nescafe.png" alt="Nescafé" loading="lazy"></span>
+      </div>
+      <div class="logo-marquee-group" aria-hidden="true">
+          <span class="logo-marquee-item"><img src="assets/images/logos/mclaren.png" alt="McLaren" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/aston-martin.png" alt="Aston Martin" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/lamborghini.png" alt="Lamborghini" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/bmw.png" alt="BMW" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/sinn.png" alt="Sinn" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/hanuman-beverages.png" alt="Hanuman Beverages" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/fine.png" alt="Fine" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/comfort.png" alt="Comfort" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/toyota.png" alt="Toyota" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/hard-rock-cafe.png" alt="Hard Rock Cafe" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/ginsomin.png" alt="Ginsomin" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/tiger-beer.png" alt="Tiger Beer" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/heineken.png" alt="Heineken" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/kitkat.png" alt="KitKat" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/camid.png" alt="CamID" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/grab.png" alt="Grab" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/black-panther-beer.png" alt="Black Panther Beer" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/halls.png" alt="Halls" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/dentyne.png" alt="Dentyne" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/maggi.png" alt="Maggi" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/coca-cola.png" alt="Coca-Cola" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/mega-we-care.png" alt="Mega We Care" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/breathe.png" alt="Breathe Wild" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/bong-tees.png" alt="Bong Tees" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/jso.png" alt="JSO" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/casio.png" alt="Casio" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/dragon-land.png" alt="Dragon Land" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/asean-energy.png" alt="ASEAN Centre for Energy" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/jti.png" alt="JTI" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/pleng.png" alt="Pleng" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/byd.png" alt="BYD" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/nescafe.png" alt="Nescafé" loading="lazy"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO MARQUEE — PARENT COMPANIES -->
+  <section class="logo-marquee-section logo-marquee-section--parents" aria-label="Parent companies">
+    <div class="logo-marquee-track">
+      <div class="logo-marquee-group">
+          <span class="logo-marquee-item"><img src="assets/images/logos/hgb-group.png" alt="HGB Group" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/sinn.png" alt="Sinn" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/hanuman-beverages.png" alt="Hanuman Beverages" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/imperial-tobacco.png" alt="Imperial Tobacco" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/unilever.png" alt="Unilever" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/toyota.png" alt="Toyota" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/hard-rock-cafe.png" alt="Hard Rock Cafe" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/mega-we-care.png" alt="Mega We Care" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/heineken.png" alt="Heineken" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/nestle.png" alt="Nestlé" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/metfone.png" alt="Metfone" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/grab.png" alt="Grab" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/carlsberg.png" alt="Carlsberg Group" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/mondelez.png" alt="Mondelez International" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/coca-cola.png" alt="Coca-Cola" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/breathe.png" alt="Breathe Wild" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/bong-tees.png" alt="Bong Tees" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/casio.png" alt="Casio" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/dragon-land.png" alt="Dragon Land" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/asean-energy.png" alt="ASEAN Centre for Energy" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/jti.png" alt="JTI" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/smart-axiata.png" alt="Smart Axiata" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/byd.png" alt="BYD" loading="lazy"></span>
+      </div>
+      <div class="logo-marquee-group" aria-hidden="true">
+          <span class="logo-marquee-item"><img src="assets/images/logos/hgb-group.png" alt="HGB Group" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/sinn.png" alt="Sinn" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/hanuman-beverages.png" alt="Hanuman Beverages" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/imperial-tobacco.png" alt="Imperial Tobacco" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/unilever.png" alt="Unilever" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/toyota.png" alt="Toyota" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/hard-rock-cafe.png" alt="Hard Rock Cafe" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/mega-we-care.png" alt="Mega We Care" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/heineken.png" alt="Heineken" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/nestle.png" alt="Nestlé" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/metfone.png" alt="Metfone" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/grab.png" alt="Grab" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/carlsberg.png" alt="Carlsberg Group" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/mondelez.png" alt="Mondelez International" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/coca-cola.png" alt="Coca-Cola" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/breathe.png" alt="Breathe Wild" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/bong-tees.png" alt="Bong Tees" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/casio.png" alt="Casio" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/dragon-land.png" alt="Dragon Land" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/asean-energy.png" alt="ASEAN Centre for Energy" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/jti.png" alt="JTI" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/smart-axiata.png" alt="Smart Axiata" loading="lazy"></span>
+          <span class="logo-marquee-item"><img src="assets/images/logos/byd.png" alt="BYD" loading="lazy"></span>
+      </div>
+    </div>
+  </section>
+  <!-- WORK -->
+  <section class="work-section" id="work">
+    <div class="container">
+
+      <div class="section-header">
+        <span class="t-accent">01</span>
+        <h2 class="t-subheading">Selected Work</h2>
+      </div>
+
+      <!-- FILTER -->
+      <div class="filter-bar" role="group" aria-label="Filter work by category">
+        <button class="filter-btn active" data-filter="all"><span>All</span></button>
+        <button class="filter-btn" data-filter="luxury"><span>Luxury &amp; Automotive</span></button>
+        <button class="filter-btn" data-filter="campaign"><span>Campaign &amp; Advertising</span></button>
+        <button class="filter-btn" data-filter="digital"><span>Digital</span></button>
+        <button class="filter-btn" data-filter="identity"><span>Brand Identity</span></button>
+        <button class="filter-btn" data-filter="experiential"><span>Event &amp; Experiential</span></button>
+      </div>
+
+      <!-- WORK LIST -->
+      <ul class="work-list" id="workList">
+
+        <!-- LUXURY & AUTOMOTIVE -->
+        <li class="work-list-item" data-category="luxury">
+          <a class="work-list-link" href="projects/mclaren-elva.html" data-img="assets/images/mclaren-elva-showroom.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">01</span>
+              <span class="work-list-title">McLaren Elva</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Luxury &amp; Automotive — 2021</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="luxury">
+          <a class="work-list-link" href="projects/aston-martin.html" data-img="assets/images/aston-martin-dbs-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">02</span>
+              <span class="work-list-title">Aston Martin DBS Superleggera</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Luxury &amp; Automotive — 2021</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="luxury">
+          <a class="work-list-link" href="projects/lamborghini-mclaren.html" data-img="assets/images/lamborghini-ad-01.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">03</span>
+              <span class="work-list-title">Lamborghini Huracán STO &amp; McLaren 720S</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Luxury &amp; Automotive</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="luxury">
+          <a class="work-list-link" href="projects/bmw-4series.html" data-img="assets/images/bmw-4series-backdrop.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">04</span>
+              <span class="work-list-title">BMW 4 Series Coupé</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Luxury &amp; Automotive — 2022</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="luxury">
+          <a class="work-list-link" href="projects/sinn-watches.html" data-img="assets/images/sinn-watch-store-window-sticker-all.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">05</span>
+              <span class="work-list-title">Sinn Watches</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Luxury &amp; Automotive</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- CAMPAIGN & ADVERTISING -->
+        <li class="work-list-item" data-category="campaign">
+          <a class="work-list-link" href="projects/hanuman-lite.html" data-img="assets/images/hanuman-lite-ooh-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">06</span>
+              <span class="work-list-title">Hanuman Lite — Greatest Moments</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Campaign &amp; Advertising</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="campaign">
+          <a class="work-list-link" href="projects/fine-cigarettes.html" data-img="assets/images/fine-cigarettes-kv-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">07</span>
+              <span class="work-list-title">Fine — Choice of the Now Generation</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Campaign &amp; Advertising</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="campaign">
+          <a class="work-list-link" href="projects/comfort.html" data-img="assets/images/comfort-fleur-kv-01.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">08</span>
+              <span class="work-list-title">Comfort — Scent Campaign</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Campaign &amp; Advertising</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="campaign">
+          <a class="work-list-link" href="projects/toyota.html" data-img="assets/images/toyota-corolla-cross-kv-01.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">09</span>
+              <span class="work-list-title">Toyota Corolla Cross</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Campaign &amp; Advertising</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="campaign">
+          <a class="work-list-link" href="projects/hardrock.html" data-img="assets/images/hard-rock-cafe-kv.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">10</span>
+              <span class="work-list-title">Hard Rock Cafe — FIFA World Cup</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Campaign &amp; Advertising — 2022</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="campaign">
+          <a class="work-list-link" href="projects/ginsomin.html" data-img="assets/images/ginsomin-campaign.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">11</span>
+              <span class="work-list-title">Ginsomin</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Campaign &amp; Advertising</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- DIGITAL -->
+        <li class="work-list-item" data-category="digital">
+          <a class="work-list-link" href="projects/tiger-beer.html" data-img="assets/images/tiger-beer-kv-core.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">12</span>
+              <span class="work-list-title">Tiger Beer — Uncage Your Tiger</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Digital</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="digital">
+          <a class="work-list-link" href="projects/tiger-concert.html" data-img="assets/images/tiger-concert-day1.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">13</span>
+              <span class="work-list-title">Tiger Beer — KNY Concert</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Digital — 2026</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="digital">
+          <a class="work-list-link" href="projects/heineken-silver.html" data-img="assets/images/heineken-silver-maily.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">14</span>
+              <span class="work-list-title">Heineken Silver — EDM Nights</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Digital — 2025</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="digital">
+          <a class="work-list-link" href="projects/kitkat.html" data-img="assets/images/kitkat-christmas-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">15</span>
+              <span class="work-list-title">KitKat — Have a Break</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Digital</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="digital">
+          <a class="work-list-link" href="projects/camid-seasonal.html" data-img="assets/images/camid-halloween-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">16</span>
+              <span class="work-list-title">CamID — Seasonal Campaign</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Digital</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="digital">
+          <a class="work-list-link" href="projects/camid-wnl.html" data-img="assets/images/camid-wnl-009-poster.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">17</span>
+              <span class="work-list-title">CamID — Watch No Limit</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Digital</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="digital">
+          <a class="work-list-link" href="projects/grab.html" data-img="assets/images/grab-kv-grandma.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">18</span>
+              <span class="work-list-title">Grab — Use Grab, Save Smarter</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Digital</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="digital">
+          <a class="work-list-link" href="projects/black-panther.html" data-img="assets/images/black-panther-kny-2026.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">19</span>
+              <span class="work-list-title">Black Panther Beer</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Digital</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="digital">
+          <a class="work-list-link" href="projects/halls-dentyne.html" data-img="assets/images/dentyne-product-04.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">20</span>
+              <span class="work-list-title">Halls &amp; Dentyne</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Digital</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="digital">
+          <a class="work-list-link" href="projects/maggi.html" data-img="assets/images/maggi-socmed-01.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">21</span>
+              <span class="work-list-title">Maggi</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Digital</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="digital">
+          <a class="work-list-link" href="projects/cocacola-ph.html" data-img="assets/images/coke-tp-poster.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">22</span>
+              <span class="work-list-title">Coca-Cola Philippines</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Digital</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="digital">
+          <a class="work-list-link" href="projects/gofen.html" data-img="assets/images/gofen-carousel-01.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">23</span>
+              <span class="work-list-title">Gofen — Mega We Care</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Digital</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- BRAND IDENTITY -->
+        <li class="work-list-item" data-category="identity">
+          <a class="work-list-link" href="projects/breathe.html" data-img="assets/images/breathe-identity-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">24</span>
+              <span class="work-list-title">Breathe</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Brand Identity</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="identity">
+          <a class="work-list-link" href="projects/bongtees.html" data-img="assets/images/bongtees-brand-guide-01.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">25</span>
+              <span class="work-list-title">Bong Tees / Just Slightly Offensive</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Brand Identity</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="identity">
+          <a class="work-list-link" href="projects/brand-logos.html" data-img="assets/images/brand-logos.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">26</span>
+              <span class="work-list-title">Logo &amp; Brand Mark Collection</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Brand Identity</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <!-- EVENT & EXPERIENTIAL -->
+        <li class="work-list-item" data-category="experiential">
+          <a class="work-list-link" href="projects/gshock.html" data-img="assets/images/gshock-mainstage.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">27</span>
+              <span class="work-list-title">G-Shock — Shock the World</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Event &amp; Experiential</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="experiential">
+          <a class="work-list-link" href="projects/dragon-land.html" data-img="assets/images/dragon-land-kv-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">28</span>
+              <span class="work-list-title">Dragon Elite Villa Exhibition</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Event &amp; Experiential — 2022</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="experiential">
+          <a class="work-list-link" href="projects/asean-energy.html" data-img="assets/images/asean-energy-business-forum-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">29</span>
+              <span class="work-list-title">ASEAN Energy Business Forum</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Event &amp; Experiential — 2022</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="experiential">
+          <a class="work-list-link" href="projects/jti-grandprix.html" data-img="assets/images/jti-grandprix-speaker.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">30</span>
+              <span class="work-list-title">JTI — Grand Prix of Growth</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Event &amp; Experiential — 2025</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="experiential">
+          <a class="work-list-link" href="projects/pleng.html" data-img="assets/images/pleng-performer-01.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">31</span>
+              <span class="work-list-title">Pleng by Smart — Points Virtual Launch</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Event &amp; Experiential — 2021</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="experiential">
+          <a class="work-list-link" href="projects/exhibition-stands.html" data-img="assets/images/prudential-life-booth.png">
+            <div class="work-list-left">
+              <span class="work-list-num">32</span>
+              <span class="work-list-title">Exhibition Stand Design</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Event &amp; Experiential</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="experiential">
+          <a class="work-list-link" href="projects/bmw-byd-showroom.html" data-img="assets/images/byd-activation.png">
+            <div class="work-list-left">
+              <span class="work-list-num">33</span>
+              <span class="work-list-title">BYD Showroom Design</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Event &amp; Experiential</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work-list-item" data-category="experiential">
+          <a class="work-list-link" href="projects/nescafe.html" data-img="assets/images/nescafe-standee-main.jpg">
+            <div class="work-list-left">
+              <span class="work-list-num">34</span>
+              <span class="work-list-title">Nescafé — Brand Activation</span>
+            </div>
+            <div class="work-list-right">
+              <span class="work-list-cat">Event &amp; Experiential</span>
+              <span class="work-list-plus">+</span>
+            </div>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section">
+    <div class="container--narrow">
+      <p class="t-accent" style="margin-bottom: 16px;">Get in touch</p>
+      <h2 class="contact-line">Let's work<br>together.</h2>
+      <a href="mailto:emersondepasion@gmail.com" class="contact-link">emersondepasion@gmail.com</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <span class="footer-tagline">Eternum Designum Praevalet</span>
+    <span class="footer-copy">&copy; 2026 Emerson De Pasion. Phnom Penh, Cambodia.</span>
+  </footer>
+
+  <script>
+    // FILTER with fill animation
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const workItems  = document.querySelectorAll('.work-list-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        workItems.forEach(item => {
+          item.classList.toggle('hidden',
+            filter !== 'all' && item.dataset.category !== filter);
+        });
+        // renumber visible
+        let n = 1;
+        workItems.forEach(item => {
+          if (!item.classList.contains('hidden')) {
+            item.querySelector('.work-list-num').textContent =
+              String(n++).padStart(2, '0');
+          }
+        });
+      });
+    });
+
+    // CURSOR FOLLOW LOGO WATERMARK
+    const preview = document.getElementById('workPreview');
+
+    document.querySelectorAll('.work-list-link').forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        preview.classList.add('visible');
+      });
+      link.addEventListener('mousemove', e => {
+        preview.style.left = e.clientX + 'px';
+        preview.style.top  = e.clientY + 'px';
+      });
+      link.addEventListener('mouseleave', () => {
+        preview.classList.remove('visible');
+      });
+    });
+  </script>
+
+</body>
+</html>
