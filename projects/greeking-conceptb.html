@@ -133,7 +133,16 @@
       .gallery-img.half, .gallery-img.third{ grid-column: span 12; }
       .case-meta-bar{ gap:24px; }
     }
-  </style>
+  
+    @media (max-width: 600px){
+      header.site-header nav{ gap: 10px !important; }
+      header.site-header .nav-logo img{ width:44px !important; height:44px !important; }
+      header.site-header .nav-links{ gap:14px !important; }
+      header.site-header .nav-links a{ font-size:11px !important; }
+      header.site-header nav .btn.btn-solid{ padding: 6px !important; gap: 0 !important; }
+      header.site-header nav .btn.btn-solid .cta-label{ display: none; }
+    }
+      </style>
 </head>
 <body>
 
@@ -149,7 +158,7 @@
         <li><a href="../about.html">About<span class="nav-num" style="font-size:9px; vertical-align:super; color: var(--accent); margin-left:2px;">02</span></a></li>
         <li><a href="../index.html#work" class="active">Work<span class="nav-num" style="font-size:9px; vertical-align:super; color: var(--accent); margin-left:2px;">03</span></a></li>
       </ul>
-      <a href="mailto:emersondepasion@gmail.com" class="btn btn-solid" style="display:inline-flex; align-items:center; gap:10px; font-size:14px; font-weight:500; padding:6px 22px 6px 6px; border-radius:999px; text-decoration:none; background:#0D0D0D; color:#fff;"><span style="width:32px; height:32px; border-radius:50%; background: var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-size:15px;">&#8594;</span>Get in touch</a>
+      <a href="mailto:emersondepasion@gmail.com" class="btn btn-solid" style="display:inline-flex; align-items:center; gap:10px; font-size:14px; font-weight:500; padding:6px 22px 6px 6px; border-radius:999px; text-decoration:none; background:#0D0D0D; color:#fff;"><span style="width:32px; height:32px; border-radius:50%; background: var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-size:15px;">&#8594;</span><span class="cta-label">Get in touch</span></a>
     </nav>
   </header>
 
