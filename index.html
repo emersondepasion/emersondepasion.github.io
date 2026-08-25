@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <meta name="description" content="Emerson De Pasion — Creative Professional. Advertising, brand identity, luxury automotive, and experiential design across the Philippines and Cambodia.">
   <title>Emerson De Pasion — Creative Professional</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,6 +51,12 @@
       --text-secondary: #6B6B66;
       --border: rgba(0,0,0,.12);
       background: var(--ground);
+      /* Establish a stacking context above the sticky hero pins so this
+         entire block (not just introSection's own box) always paints over
+         them — prevents the dark hero from bleeding through in any gap
+         where a section's content is shorter than the viewport. */
+      position: relative;
+      z-index: 1;
     }
     .light-zone.tint{ background: #F5F4F3; }
 
@@ -334,9 +344,9 @@
     </a>
     <nav style="display:flex; align-items:center; gap:40px;">
       <ul class="nav-links">
-        <li><a href="index.html" class="active">Home<span class="nav-num">01</span></a></li>
-        <li><a href="about.html">About<span class="nav-num">02</span></a></li>
-        <li><a href="index.html#work">Work<span class="nav-num">03</span></a></li>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#work">Work</a></li>
       </ul>
       <a href="mailto:emersondepasion@gmail.com" class="btn btn-solid"><span class="btn-icon">&#8594;</span><span class="cta-label">Get in touch</span></a>
     </nav>
@@ -1086,11 +1096,9 @@
 
       const steps = [...incoming.querySelectorAll('.viper-step')];
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      // Softened stagger (round 4): tighter spread between columns so the
-      // leading edge reads as one deliberate wave rather than disconnected blocks.
       const maxOffsets = profile === 'portfolio'
-        ? [58, 68, 84, 66, 50]
-        : [30, 36, 46, 35, 27];
+        ? [72, 99, 162, 90, 45]
+        : [38, 53, 86, 48, 24];
 
       let ticking = false;
       function update(){
