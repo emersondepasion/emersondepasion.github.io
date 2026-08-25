@@ -327,7 +327,7 @@
 <body>
 
 
-  <header class="site-header" style="position:relative; z-index:5;">
+  <header class="site-header">
     <a href="index.html" class="nav-logo">
       <img src="assets/images/edp-logo.png" alt="EDP monogram">
       <span class="nav-logo-text">Emerson De Pasion</span>
@@ -1086,9 +1086,11 @@
 
       const steps = [...incoming.querySelectorAll('.viper-step')];
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Softened stagger (round 4): tighter spread between columns so the
+      // leading edge reads as one deliberate wave rather than disconnected blocks.
       const maxOffsets = profile === 'portfolio'
-        ? [72, 99, 162, 90, 45]
-        : [38, 53, 86, 48, 24];
+        ? [58, 68, 84, 66, 50]
+        : [30, 36, 46, 35, 27];
 
       let ticking = false;
       function update(){
