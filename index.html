@@ -135,6 +135,28 @@
     }
     .sticky-media{ position:absolute; inset:0; width:100%; height:100%; overflow:hidden; background:#0D0D0D; }
     .hero-bg{ position:absolute; inset:-4% -2%; background-image:url('assets/images/hero-portrait-emerson.jpg'); background-size:cover; background-position:center 30%; opacity:1; will-change:transform,filter; }
+
+    /* Cursor-tracked "scan reveal": a spotlight follows the pointer (or a touch
+       drag on mobile) and uncovers this second portrait wherever it passes,
+       while the rest of the frame stays on the normal photo above. The mask
+       lives on the wrapper (in sticky-media's own coordinates, so it always
+       tracks the pointer precisely); the artwork's own crop/alignment sits on
+       the inner layer so nudging one never fights the other. Inert until
+       .active is toggled by JS on hover/touch — see initHeroScanReveal(). */
+    .hero-xray-mask{
+      position:absolute; inset:0; overflow:hidden; opacity:0;
+      transition:opacity .25s ease;
+      --hxr:173px; --hxs:60px; --hxmx:50%; --hxmy:50%;
+      -webkit-mask-image: radial-gradient(circle var(--hxr) at var(--hxmx) var(--hxmy), rgba(0,0,0,1) 0, rgba(0,0,0,1) calc(100% - var(--hxs)), rgba(0,0,0,0) 100%);
+      mask-image: radial-gradient(circle var(--hxr) at var(--hxmx) var(--hxmy), rgba(0,0,0,1) 0, rgba(0,0,0,1) calc(100% - var(--hxs)), rgba(0,0,0,0) 100%);
+    }
+    .hero-xray-mask.active{ opacity:1; }
+    .hero-xray-bg{
+      position:absolute; inset:-4% -2%;
+      background-image:url('assets/images/hero-scan-portrait.jpg');
+      background-size:cover; background-position:center 30%;
+      transform: translate(-1%,-1%) scale(0.96);
+    }
     .hero-seal{ position:absolute; right:-6vw; top:50%; transform:translateY(-50%); width:clamp(420px,55vw,780px); aspect-ratio:1; background-image:url('assets/images/edp-logo-bg.png'); background-size:cover; background-position:center; opacity:.18; pointer-events:none; }
     .hero-overlay{ position:absolute; inset:0; background: linear-gradient(180deg, rgba(13,13,13,.1) 0%, rgba(13,13,13,.35) 55%, rgba(13,13,13,.92) 100%); }
     .hero-inner{ position:absolute; left:32px; right:32px; bottom:64px; z-index:1; will-change:opacity,transform; }
@@ -144,9 +166,10 @@
     .hero-desc{ max-width:480px; font-weight:400; font-size:15px; line-height:1.8; color: var(--text-primary); margin-top:24px; }
 
     .hero-bio-card{
-      /* Round 4: bottom-aligned to the hero name's baseline (measured against
-         .hero-name's rendered bottom edge) instead of vertically centered. */
-      position:absolute; right:6%; bottom:169px; z-index:1;
+      /* Round 6: bottom-aligned to the "De Pasion" (accent) line specifically —
+         measured against that <em>'s own rendered bottom edge, not the whole
+         two-line hero-name block. */
+      position:absolute; right:6%; bottom:103px; z-index:1;
       width:min(340px,30vw); background:rgba(13,13,13,.55); backdrop-filter:blur(8px);
       border:1px solid rgba(255,255,255,.14); border-radius:16px; padding:24px;
     }
@@ -356,6 +379,7 @@
   <div class="hero-pin" id="heroPin">
     <section class="sticky-media" id="heroSticky">
       <div class="hero-bg" id="heroBg"></div>
+      <div class="hero-xray-mask" id="heroXrayMask"><div class="hero-xray-bg"></div></div>
       <div class="hero-overlay"></div>
       <div class="hero-inner" id="heroInner">
         <span class="hero-kicker">Creative Professional &middot; Philippines &amp; Cambodia</span>
@@ -1149,6 +1173,37 @@
     }
     initViperTransition({ incomingId:'introSection', pinId:'heroPin', bgId:'heroBg', innerId:'heroInner', variant:'still', profile:'intro' });
     initViperTransition({ incomingId:'work', pinId:'heroPin2', bgId:'hero2Bg', variant:'zoom', profile:'portfolio' });
+
+    // Hero "scan reveal": a spotlight follows the pointer (mouse on desktop,
+    // a finger drag on touch devices) and uncovers the second portrait inside
+    // hero-xray-bg wherever it passes over the sticky hero photo.
+    function initHeroScanReveal(){
+      const stage = document.getElementById('heroSticky');
+      const mask = document.getElementById('heroXrayMask');
+      if(!stage || !mask) return;
+
+      function moveTo(clientX, clientY){
+        const rect = stage.getBoundingClientRect();
+        mask.style.setProperty('--hxmx', (clientX - rect.left) + 'px');
+        mask.style.setProperty('--hxmy', (clientY - rect.top) + 'px');
+      }
+
+      stage.addEventListener('mouseenter', () => mask.classList.add('active'));
+      stage.addEventListener('mouseleave', () => mask.classList.remove('active'));
+      stage.addEventListener('mousemove', (e) => moveTo(e.clientX, e.clientY));
+
+      stage.addEventListener('touchstart', (e) => {
+        mask.classList.add('active');
+        const t = e.touches[0];
+        moveTo(t.clientX, t.clientY);
+      }, { passive:true });
+      stage.addEventListener('touchmove', (e) => {
+        const t = e.touches[0];
+        moveTo(t.clientX, t.clientY);
+      }, { passive:true });
+      stage.addEventListener('touchend', () => mask.classList.remove('active'));
+    }
+    initHeroScanReveal();
 
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in-view'); });
