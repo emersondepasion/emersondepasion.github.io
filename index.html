@@ -370,8 +370,9 @@
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="index.html#work">Work</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
-      <a href="mailto:emersondepasion@gmail.com" class="btn btn-solid"><span class="btn-icon">&#8594;</span><span class="cta-label">Get in touch</span></a>
+      <a href="contact.html" class="btn btn-solid"><span class="btn-icon">&#8594;</span><span class="cta-label">Get in touch</span></a>
     </nav>
   </header>
 
@@ -406,7 +407,7 @@
         <span class="intro-eyebrow reveal"><span class="dot"></span>A Quick Intro</span>
         <p class="intro-statement reveal"><span class="dot"></span>Seasoned creative professional with over 20 years of experience in advertising, branding, and strategic visual direction across the Philippines and Cambodia.</p>
         <div class="intro-cta reveal">
-          <a href="mailto:emersondepasion@gmail.com" class="btn btn-solid"><span class="btn-icon">&#8594;</span>Get in touch</a>
+          <a href="contact.html" class="btn btn-solid"><span class="btn-icon">&#8594;</span>Get in touch</a>
         </div>
         <div class="intro-boxes">
           <div class="intro-box reveal">
@@ -480,7 +481,7 @@
           </div>
         </div>
         <div class="approach-footer">
-          <a href="mailto:emersondepasion@gmail.com" class="btn btn-solid"><span class="btn-icon">&#8594;</span>Contact now</a>
+          <a href="contact.html" class="btn btn-solid"><span class="btn-icon">&#8594;</span>Contact now</a>
           <ul class="approach-list">
             <li>Context</li>
             <li>Creative Direction</li>
@@ -1077,7 +1078,7 @@
         </div>
         <div class="contact-list reveal">
           <a href="mailto:emersondepasion@gmail.com">emersondepasion@gmail.com</a>
-          <a href="tel:+8550769666258">+855 0769 666 258</a>
+          <a href="tel:+855769666258">+855 0769 666 258</a>
           <p>Phnom Penh, Cambodia</p>
         </div>
       </div>
@@ -1250,6 +1251,32 @@
       btn.addEventListener('click', ()=>{
         window.scrollTo({ top:0, behavior:'smooth' });
       });
+    })();
+
+    // Nav scroll-spy — this is the only page with more than one nav target on
+    // it (Home / Work), so it's the only page that needs this. Highlights
+    // "Work" once the visitor scrolls into the portfolio section and returns
+    // to "Home" above it, instead of leaving "Home" lit the whole time.
+    (function(){
+      const workSection = document.getElementById('work');
+      const homeLink = document.querySelector('.nav-links a[href="index.html"]');
+      const workLink = document.querySelector('.nav-links a[href="index.html#work"]');
+      if(!workSection || !homeLink || !workLink) return;
+      const header = document.querySelector('header.site-header');
+      const headerH = header ? header.offsetHeight : 0;
+      function updateNav(){
+        const triggerPoint = workSection.getBoundingClientRect().top;
+        if(triggerPoint <= headerH + 40){
+          workLink.classList.add('active');
+          homeLink.classList.remove('active');
+        } else {
+          homeLink.classList.add('active');
+          workLink.classList.remove('active');
+        }
+      }
+      window.addEventListener('scroll', updateNav, { passive:true });
+      window.addEventListener('resize', updateNav);
+      updateNav();
     })();
   </script>
 
