@@ -8,7 +8,8 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <meta name="description" content="Emerson De Pasion — Creative Professional. Advertising, brand identity, luxury automotive, and experiential design across the Philippines and Cambodia.">
-  <title>Emerson De Pasion — Creative Professional</title>
+  <title>PREVIEW — Emerson De Pasion — Creative Professional</title>
+  <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -77,11 +78,7 @@
 
     /* Reusable "(CQ° — 0N) / ©2025" header row, used consistently before major sections. */
     .cq-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:56px; font-size:13px; color: var(--text-secondary); flex-wrap:wrap; gap:12px; }
-    .section-eyebrow{
-      display:flex; align-items:center; gap:8px; font-size:13px; font-weight:500;
-      color: var(--text-primary); margin-bottom:24px;
-    }
-    .cq-header .section-eyebrow{ margin-bottom:0; }
+    .cq-eyebrow{ display:flex; align-items:center; gap:8px; color: var(--text-primary); font-weight:500; }
     .dot{ width:8px; height:8px; background: var(--accent); flex-shrink:0; display:inline-block; }
     .cq-code{ font-variant-numeric: tabular-nums; }
 
@@ -92,9 +89,9 @@
       background: var(--pd-bg, #FFFFFF); padding:0 12px; font-size:13px; color: var(--text-secondary); line-height:1;
     }
 
-    .card-eyebrow{
-      display:block; font-size:11px; font-weight:700; letter-spacing:.08em;
-      text-transform:uppercase; color:var(--accent); margin-bottom:8px;
+    .eyebrow{
+      font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+      color: var(--accent); margin-bottom:20px; display:block;
     }
     .section-title{
       font-weight:700; font-size: clamp(30px, 4vw, 56px); line-height:1.05; letter-spacing:-0.01em;
@@ -160,7 +157,6 @@
       background-image:url('assets/images/hero-scan-portrait.jpg');
       background-size:cover; background-position:center 30%;
       transform: translate(-1%,-1%) scale(0.96);
-      will-change:transform,filter;
     }
     .hero-seal{ position:absolute; right:-6vw; top:50%; transform:translateY(-50%); width:clamp(420px,55vw,780px); aspect-ratio:1; background-image:url('assets/images/edp-logo-bg.png'); background-size:cover; background-position:center; opacity:.18; pointer-events:none; }
     .hero-overlay{ position:absolute; inset:0; background: linear-gradient(180deg, rgba(13,13,13,.1) 0%, rgba(13,13,13,.35) 55%, rgba(13,13,13,.92) 100%); }
@@ -221,6 +217,7 @@
     .hero2-overlay{ position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,.3) 60%, rgba(0,0,0,.85) 100%); }
 
     /* ===== INTRO (round 2 restructure) ===== */
+    .intro-eyebrow{ display:flex; align-items:center; gap:8px; font-size:13px; font-weight:500; color: var(--text-primary); margin-bottom:32px; }
     .intro-statement{ display:flex; gap:16px; font-weight:600; font-size: clamp(22px, 2.8vw, 38px); line-height:1.35; color: var(--text-primary); max-width:900px; }
     .intro-statement .dot{ margin-top:14px; }
     .intro-cta{ margin:32px 0 0 32px; }
@@ -319,7 +316,7 @@
     .expertise-list{ list-style:none; }
     .expertise-list li{ font-size:15px; color: var(--text-primary); padding:12px 0; border-top:1px solid var(--border); }
 
-    /* ===== CLIENT REVIEWS ===== */
+    /* ===== CLIENT REVIEWS (preview) ===== */
     .reviews-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; margin-top:56px; }
     .review-card{ background: var(--surface); border-radius:16px; padding:32px; display:flex; flex-direction:column; }
     .review-quote-mark{ font-family: Georgia, serif; font-size:44px; line-height:1; color: var(--accent); font-weight:700; margin-bottom:8px; display:block; }
@@ -328,8 +325,16 @@
     .review-name{ font-size:14px; font-weight:600; color: var(--text-primary); }
     .review-role{ font-size:12px; color: var(--text-secondary); }
     @media (max-width:900px){ .reviews-grid{ grid-template-columns:1fr; } }
-    .reviews-empty{ max-width:600px; margin:32px auto 0; text-align:center; }
+    .reviews-empty{ max-width:600px; margin:0 auto; text-align:center; }
     .reviews-empty p{ font-size:16px; line-height:1.8; color: var(--text-secondary); margin:0 0 32px; }
+
+    /* ===== PREVIEW BADGE (not part of the real site) ===== */
+    .preview-badge{
+      position:fixed; left:20px; bottom:20px; z-index:999;
+      background:#121212; color:#fff; font-size:12px; letter-spacing:.03em;
+      padding:10px 16px; border-radius:999px; box-shadow:0 8px 24px rgba(0,0,0,.25);
+    }
+    .preview-badge strong{ color:#FF9A85; }
 
     /* ===== CONTACT ===== */
     .contact-grid{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:48px; }
@@ -376,6 +381,8 @@
 <body>
 
 
+  <div class="preview-badge">PREVIEW — <strong>Client Reviews</strong> section shown with placeholder cards, not yet live</div>
+
   <header class="site-header">
     <a href="index.html" class="nav-logo">
       <img src="assets/images/edp-logo.png" alt="EDP monogram">
@@ -386,6 +393,7 @@
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="index.html#work">Work</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
       <a href="contact.html" class="btn btn-solid"><span class="btn-icon">&#8594;</span><span class="cta-label">Get in touch</span></a>
     </nav>
@@ -418,20 +426,20 @@
         <div class="viper-step"></div><div class="viper-step"></div><div class="viper-step"></div><div class="viper-step"></div><div class="viper-step"></div>
       </div>
       <div class="plus-divider" style="--pd-bg:#FFFFFF"><span>+</span></div>
-      <div class="section-inner" style="padding-top:56px;">
-        <span class="section-eyebrow reveal"><span class="dot"></span>A Quick Intro</span>
+      <div class="section-inner" style="padding-top:12px;">
+        <span class="intro-eyebrow reveal"><span class="dot"></span>A Quick Intro</span>
         <p class="intro-statement reveal"><span class="dot"></span>Seasoned creative professional with over 20 years of experience in advertising, branding, and strategic visual direction across the Philippines and Cambodia.</p>
         <div class="intro-cta reveal">
           <a href="contact.html" class="btn btn-solid"><span class="btn-icon">&#8594;</span>Get in touch</a>
         </div>
         <div class="intro-boxes">
           <div class="intro-box reveal">
-            <span class="card-eyebrow">Design With Purpose</span>
+            <span style="display:block; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">Design With Purpose</span>
             <h3>Clarity Before Creativity</h3>
             <p>The strongest ideas begin with the right understanding. I look beyond the brief to uncover what matters—then shape it into work that feels relevant, intentional, and unmistakably connected to the brand.</p>
           </div>
           <div class="intro-box reveal">
-            <span class="card-eyebrow">Let's Collaborate</span>
+            <span style="display:block; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">Let's Collaborate</span>
             <h3>Let's Create What's Next</h3>
             <p>Have a brand challenge, campaign, or idea taking shape? Tell me where you want to go, and let's explore how thoughtful creativity can help get you there.</p>
           </div>
@@ -452,7 +460,7 @@
 
     <!-- CLIENT MARQUEE -->
     <div class="client-marquee">
-      <div class="client-track"><div class="client-cell"><img src="assets/images/logos/mclaren.png" alt="McLaren" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/aston-martin.png" alt="Aston Martin" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/lamborghini.png" alt="Lamborghini" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/bmw.png" alt="BMW" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/sinn.png" alt="Sinn" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/hanuman-beverages.png" alt="Hanuman Beverages" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/fine.png" alt="Fine" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/comfort.png" alt="Comfort" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/toyota.png" alt="Toyota" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/hard-rock-cafe.png" alt="Hard Rock Cafe" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/ginsomin.png" alt="Ginsomin" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/tiger-beer.png" alt="Tiger Beer" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/heineken.png" alt="Heineken" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/kitkat.png" alt="KitKat" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/camid.png" alt="CamID" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/grab.png" alt="Grab" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/black-panther-beer.png" alt="Black Panther Beer" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/halls.png" alt="Halls" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/dentyne.png" alt="Dentyne" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/maggi.png" alt="Maggi" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/coca-cola.png" alt="Coca-Cola" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/mega-we-care.png" alt="Mega We Care" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/breathe.png" alt="Breathe Wild" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/bong-tees.png" alt="Bong Tees" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/jso.png" alt="JSO" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/casio.png" alt="Casio" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/dragon-land.png" alt="Dragon Land" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/asean-energy.png" alt="ASEAN Centre for Energy" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/jti.png" alt="JTI" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/pleng.png" alt="Pleng" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/byd.png" alt="BYD" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/nescafe.png" alt="Nescafé" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/botanico.png" alt="Botanico" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/mclaren.png" alt="McLaren" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/aston-martin.png" alt="Aston Martin" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/lamborghini.png" alt="Lamborghini" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/bmw.png" alt="BMW" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/sinn.png" alt="Sinn" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/hanuman-beverages.png" alt="Hanuman Beverages" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/fine.png" alt="Fine" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/comfort.png" alt="Comfort" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/toyota.png" alt="Toyota" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/hard-rock-cafe.png" alt="Hard Rock Cafe" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/ginsomin.png" alt="Ginsomin" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/tiger-beer.png" alt="Tiger Beer" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/heineken.png" alt="Heineken" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/kitkat.png" alt="KitKat" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/camid.png" alt="CamID" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/grab.png" alt="Grab" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/black-panther-beer.png" alt="Black Panther Beer" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/halls.png" alt="Halls" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/dentyne.png" alt="Dentyne" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/maggi.png" alt="Maggi" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/coca-cola.png" alt="Coca-Cola" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/mega-we-care.png" alt="Mega We Care" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/breathe.png" alt="Breathe Wild" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/bong-tees.png" alt="Bong Tees" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/jso.png" alt="JSO" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/casio.png" alt="Casio" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/dragon-land.png" alt="Dragon Land" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/asean-energy.png" alt="ASEAN Centre for Energy" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/jti.png" alt="JTI" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/pleng.png" alt="Pleng" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/byd.png" alt="BYD" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/nescafe.png" alt="Nescafé" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/botanico.png" alt="Botanico" loading="lazy"></div></div>
+      <div class="client-track"><div class="client-cell"><img src="assets/images/logos/mclaren.png" alt="McLaren" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/aston-martin.png" alt="Aston Martin" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/lamborghini.png" alt="Lamborghini" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/bmw.png" alt="BMW" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/sinn.png" alt="Sinn" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/hanuman-beverages.png" alt="Hanuman Beverages" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/fine.png" alt="Fine" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/comfort.png" alt="Comfort" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/toyota.png" alt="Toyota" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/hard-rock-cafe.png" alt="Hard Rock Cafe" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/ginsomin.png" alt="Ginsomin" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/tiger-beer.png" alt="Tiger Beer" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/heineken.png" alt="Heineken" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/kitkat.png" alt="KitKat" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/camid.png" alt="CamID" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/grab.png" alt="Grab" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/black-panther-beer.png" alt="Black Panther Beer" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/halls.png" alt="Halls" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/dentyne.png" alt="Dentyne" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/maggi.png" alt="Maggi" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/coca-cola.png" alt="Coca-Cola" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/mega-we-care.png" alt="Mega We Care" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/breathe.png" alt="Breathe Wild" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/bong-tees.png" alt="Bong Tees" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/jso.png" alt="JSO" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/casio.png" alt="Casio" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/dragon-land.png" alt="Dragon Land" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/asean-energy.png" alt="ASEAN Centre for Energy" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/jti.png" alt="JTI" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/pleng.png" alt="Pleng" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/byd.png" alt="BYD" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/nescafe.png" alt="Nescafé" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/mclaren.png" alt="McLaren" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/aston-martin.png" alt="Aston Martin" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/lamborghini.png" alt="Lamborghini" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/bmw.png" alt="BMW" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/sinn.png" alt="Sinn" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/hanuman-beverages.png" alt="Hanuman Beverages" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/fine.png" alt="Fine" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/comfort.png" alt="Comfort" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/toyota.png" alt="Toyota" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/hard-rock-cafe.png" alt="Hard Rock Cafe" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/ginsomin.png" alt="Ginsomin" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/tiger-beer.png" alt="Tiger Beer" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/heineken.png" alt="Heineken" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/kitkat.png" alt="KitKat" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/camid.png" alt="CamID" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/grab.png" alt="Grab" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/black-panther-beer.png" alt="Black Panther Beer" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/halls.png" alt="Halls" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/dentyne.png" alt="Dentyne" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/maggi.png" alt="Maggi" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/coca-cola.png" alt="Coca-Cola" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/mega-we-care.png" alt="Mega We Care" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/breathe.png" alt="Breathe Wild" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/bong-tees.png" alt="Bong Tees" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/jso.png" alt="JSO" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/casio.png" alt="Casio" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/dragon-land.png" alt="Dragon Land" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/asean-energy.png" alt="ASEAN Centre for Energy" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/jti.png" alt="JTI" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/pleng.png" alt="Pleng" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/byd.png" alt="BYD" loading="lazy"></div><div class="client-cell"><img src="assets/images/logos/nescafe.png" alt="Nescafé" loading="lazy"></div></div>
     </div>
 
     <!-- APPROACH (round 2 rebuild) -->
@@ -461,7 +469,7 @@
       <div class="section-inner" style="padding-top:56px;">
 
     <div class="cq-header reveal">
-      <span class="section-eyebrow"><span class="dot"></span>My Approach</span>
+      <span class="cq-eyebrow"><span class="dot"></span>Approach Style</span>
     </div>
         <div class="approach-grid">
           <div class="approach-card reveal">
@@ -520,10 +528,10 @@
         <div class="viper-step"></div><div class="viper-step"></div><div class="viper-step"></div><div class="viper-step"></div><div class="viper-step"></div>
       </div>
       <div class="plus-divider" style="--pd-bg:#FFFFFF"><span>+</span></div>
-      <div class="section-inner" style="padding-top:56px;">
-
+      <div class="section-inner" style="padding-top:12px;">
+        
     <div class="cq-header reveal">
-      <span class="section-eyebrow"><span class="dot"></span>Selected Work</span>
+      <span class="cq-eyebrow"><span class="dot"></span>Featured Works</span>
     </div>
         <div class="portfolio-head reveal">
           <h2 class="portfolio-title">Featured Portfolio<sup>&reg;</sup></h2>
@@ -532,7 +540,7 @@
             <a href="#featGrid" class="btn btn-solid"><span class="btn-icon">&#8594;</span>View portfolio</a>
           </div>
           <p class="partners-label">Also work with these international partners:</p>
-          <div class="partner-strip"><div class="partner-track"><img src="assets/images/logos/hgb-group.png" alt="HGB Group" loading="lazy"><img src="assets/images/logos/sinn.png" alt="Sinn" loading="lazy"><img src="assets/images/logos/hanuman-beverages.png" alt="Hanuman Beverages" loading="lazy"><img src="assets/images/logos/imperial-tobacco.png" alt="Imperial Tobacco" loading="lazy"><img src="assets/images/logos/unilever.png" alt="Unilever" loading="lazy"><img src="assets/images/logos/toyota.png" alt="Toyota" loading="lazy"><img src="assets/images/logos/hard-rock-cafe.png" alt="Hard Rock Cafe" loading="lazy"><img src="assets/images/logos/mega-we-care.png" alt="Mega We Care" loading="lazy"><img src="assets/images/logos/heineken.png" alt="Heineken" loading="lazy"><img src="assets/images/logos/nestle.png" alt="Nestlé" loading="lazy"><img src="assets/images/logos/metfone.png" alt="Metfone" loading="lazy"><img src="assets/images/logos/grab.png" alt="Grab" loading="lazy"><img src="assets/images/logos/carlsberg.png" alt="Carlsberg Group" loading="lazy"><img src="assets/images/logos/mondelez.png" alt="Mondelez International" loading="lazy"><img src="assets/images/logos/coca-cola.png" alt="Coca-Cola" loading="lazy"><img src="assets/images/logos/breathe.png" alt="Breathe Wild" loading="lazy"><img src="assets/images/logos/bong-tees.png" alt="Bong Tees" loading="lazy"><img src="assets/images/logos/casio.png" alt="Casio" loading="lazy"><img src="assets/images/logos/dragon-land.png" alt="Dragon Land" loading="lazy"><img src="assets/images/logos/asean-energy.png" alt="ASEAN Centre for Energy" loading="lazy"><img src="assets/images/logos/jti.png" alt="JTI" loading="lazy"><img src="assets/images/logos/smart-axiata.png" alt="Smart Axiata" loading="lazy"><img src="assets/images/logos/byd.png" alt="BYD" loading="lazy"><img src="assets/images/logos/botanico-wordmark.png" alt="Botanico" loading="lazy"><img src="assets/images/logos/hgb-group.png" alt="HGB Group" loading="lazy"><img src="assets/images/logos/sinn.png" alt="Sinn" loading="lazy"><img src="assets/images/logos/hanuman-beverages.png" alt="Hanuman Beverages" loading="lazy"><img src="assets/images/logos/imperial-tobacco.png" alt="Imperial Tobacco" loading="lazy"><img src="assets/images/logos/unilever.png" alt="Unilever" loading="lazy"><img src="assets/images/logos/toyota.png" alt="Toyota" loading="lazy"><img src="assets/images/logos/hard-rock-cafe.png" alt="Hard Rock Cafe" loading="lazy"><img src="assets/images/logos/mega-we-care.png" alt="Mega We Care" loading="lazy"><img src="assets/images/logos/heineken.png" alt="Heineken" loading="lazy"><img src="assets/images/logos/nestle.png" alt="Nestlé" loading="lazy"><img src="assets/images/logos/metfone.png" alt="Metfone" loading="lazy"><img src="assets/images/logos/grab.png" alt="Grab" loading="lazy"><img src="assets/images/logos/carlsberg.png" alt="Carlsberg Group" loading="lazy"><img src="assets/images/logos/mondelez.png" alt="Mondelez International" loading="lazy"><img src="assets/images/logos/coca-cola.png" alt="Coca-Cola" loading="lazy"><img src="assets/images/logos/breathe.png" alt="Breathe Wild" loading="lazy"><img src="assets/images/logos/bong-tees.png" alt="Bong Tees" loading="lazy"><img src="assets/images/logos/casio.png" alt="Casio" loading="lazy"><img src="assets/images/logos/dragon-land.png" alt="Dragon Land" loading="lazy"><img src="assets/images/logos/asean-energy.png" alt="ASEAN Centre for Energy" loading="lazy"><img src="assets/images/logos/jti.png" alt="JTI" loading="lazy"><img src="assets/images/logos/smart-axiata.png" alt="Smart Axiata" loading="lazy"><img src="assets/images/logos/byd.png" alt="BYD" loading="lazy"><img src="assets/images/logos/botanico-wordmark.png" alt="Botanico" loading="lazy"></div></div>
+          <div class="partner-strip"><div class="partner-track"><img src="assets/images/logos/hgb-group.png" alt="HGB Group" loading="lazy"><img src="assets/images/logos/sinn.png" alt="Sinn" loading="lazy"><img src="assets/images/logos/hanuman-beverages.png" alt="Hanuman Beverages" loading="lazy"><img src="assets/images/logos/imperial-tobacco.png" alt="Imperial Tobacco" loading="lazy"><img src="assets/images/logos/unilever.png" alt="Unilever" loading="lazy"><img src="assets/images/logos/toyota.png" alt="Toyota" loading="lazy"><img src="assets/images/logos/hard-rock-cafe.png" alt="Hard Rock Cafe" loading="lazy"><img src="assets/images/logos/mega-we-care.png" alt="Mega We Care" loading="lazy"><img src="assets/images/logos/heineken.png" alt="Heineken" loading="lazy"><img src="assets/images/logos/nestle.png" alt="Nestlé" loading="lazy"><img src="assets/images/logos/metfone.png" alt="Metfone" loading="lazy"><img src="assets/images/logos/grab.png" alt="Grab" loading="lazy"><img src="assets/images/logos/carlsberg.png" alt="Carlsberg Group" loading="lazy"><img src="assets/images/logos/mondelez.png" alt="Mondelez International" loading="lazy"><img src="assets/images/logos/coca-cola.png" alt="Coca-Cola" loading="lazy"><img src="assets/images/logos/breathe.png" alt="Breathe Wild" loading="lazy"><img src="assets/images/logos/bong-tees.png" alt="Bong Tees" loading="lazy"><img src="assets/images/logos/casio.png" alt="Casio" loading="lazy"><img src="assets/images/logos/dragon-land.png" alt="Dragon Land" loading="lazy"><img src="assets/images/logos/asean-energy.png" alt="ASEAN Centre for Energy" loading="lazy"><img src="assets/images/logos/jti.png" alt="JTI" loading="lazy"><img src="assets/images/logos/smart-axiata.png" alt="Smart Axiata" loading="lazy"><img src="assets/images/logos/byd.png" alt="BYD" loading="lazy"><img src="assets/images/logos/hgb-group.png" alt="HGB Group" loading="lazy"><img src="assets/images/logos/sinn.png" alt="Sinn" loading="lazy"><img src="assets/images/logos/hanuman-beverages.png" alt="Hanuman Beverages" loading="lazy"><img src="assets/images/logos/imperial-tobacco.png" alt="Imperial Tobacco" loading="lazy"><img src="assets/images/logos/unilever.png" alt="Unilever" loading="lazy"><img src="assets/images/logos/toyota.png" alt="Toyota" loading="lazy"><img src="assets/images/logos/hard-rock-cafe.png" alt="Hard Rock Cafe" loading="lazy"><img src="assets/images/logos/mega-we-care.png" alt="Mega We Care" loading="lazy"><img src="assets/images/logos/heineken.png" alt="Heineken" loading="lazy"><img src="assets/images/logos/nestle.png" alt="Nestlé" loading="lazy"><img src="assets/images/logos/metfone.png" alt="Metfone" loading="lazy"><img src="assets/images/logos/grab.png" alt="Grab" loading="lazy"><img src="assets/images/logos/carlsberg.png" alt="Carlsberg Group" loading="lazy"><img src="assets/images/logos/mondelez.png" alt="Mondelez International" loading="lazy"><img src="assets/images/logos/coca-cola.png" alt="Coca-Cola" loading="lazy"><img src="assets/images/logos/breathe.png" alt="Breathe Wild" loading="lazy"><img src="assets/images/logos/bong-tees.png" alt="Bong Tees" loading="lazy"><img src="assets/images/logos/casio.png" alt="Casio" loading="lazy"><img src="assets/images/logos/dragon-land.png" alt="Dragon Land" loading="lazy"><img src="assets/images/logos/asean-energy.png" alt="ASEAN Centre for Energy" loading="lazy"><img src="assets/images/logos/jti.png" alt="JTI" loading="lazy"><img src="assets/images/logos/smart-axiata.png" alt="Smart Axiata" loading="lazy"><img src="assets/images/logos/byd.png" alt="BYD" loading="lazy"></div></div>
         </div>
 
         <div class="feat-list" id="featGrid">
@@ -1035,19 +1043,6 @@
             </div>
           </a>
         </li>
-
-        <li class="other-card">
-          <a href="projects/botanico-brandguide-conceptb.html" class="other-card-link">
-            <div class="other-card-img"><img src="assets/images/botanico-cover-thumb.jpg" alt="Botanico Brand Guide" loading="lazy"></div>
-            <div class="other-card-meta">
-              <span class="other-card-num">33</span>
-              <div>
-                <p class="other-card-title">Botanico Brand Guide</p>
-                <p class="other-card-tag">Brand Identity &middot; 2024</p>
-              </div>
-            </div>
-          </a>
-        </li>
           </ul>
         </div>
       </div>
@@ -1057,7 +1052,7 @@
     <section class="section-pad light-zone tint">
       <div class="plus-divider" style="--pd-bg:#F5F4F3"><span>+</span></div>
       <div class="section-inner" style="padding-top:56px;">
-        <span class="section-eyebrow reveal"><span class="dot"></span>Stats &amp; Facts</span>
+        <span class="eyebrow reveal">Stats &amp; Facts</span>
         <h2 class="section-title reveal">Two decades of creative direction, in numbers.</h2>
         <div class="stats-grid">
           <div class="stat-block reveal"><div class="stat-num" data-count-to="20" data-suffix="+"><span>0</span></div><div class="stat-label">Years Experience</div></div>
@@ -1071,7 +1066,7 @@
     <section class="section-pad">
       <div class="plus-divider" style="--pd-bg:#FFFFFF"><span>+</span></div>
       <div class="section-inner" style="padding-top:56px;">
-        <span class="section-eyebrow reveal"><span class="dot"></span>What I Do</span>
+        <span class="eyebrow reveal">What I Do</span>
         <h2 class="section-title reveal">Core Expertise</h2>
         <div class="expertise-grid" style="margin-top:56px;">
           <div class="reveal">
@@ -1096,11 +1091,11 @@
       </div>
     </section>
 
-    <!-- CLIENT REVIEWS -->
-    <section class="section-pad" style="padding-top:24px;">
+    <!-- CLIENT REVIEWS (preview — placeholder cards, not yet on the live site) -->
+    <section class="section-pad" style="padding-top:48px;">
       <div class="plus-divider" style="--pd-bg:#FFFFFF"><span>+</span></div>
-      <div class="section-inner" style="padding-top:56px;">
-        <span class="section-eyebrow reveal"><span class="dot"></span>Client Reviews</span>
+      <div class="section-inner" style="padding-top:20px;">
+        <span class="eyebrow reveal">Client Reviews</span>
         <h2 class="section-title reveal">What Clients Say.</h2>
         <div class="reviews-empty reveal">
           <p>I value the people I work with, and I'd love to hear how that experience felt from your side. If we've worked together, you can be the first to share yours.</p>
@@ -1114,7 +1109,7 @@
       <div class="plus-divider" style="--pd-bg:#F5F4F3"><span>+</span></div>
       <div class="section-inner contact-grid" style="padding-top:56px;">
         <div>
-          <span class="section-eyebrow reveal"><span class="dot"></span>Get In Touch</span>
+          <span class="eyebrow reveal">Get In Touch</span>
           <h2 class="section-title reveal">Let's Work<br>Together.</h2>
         </div>
         <div class="contact-list reveal">
@@ -1156,7 +1151,6 @@
       const incoming = document.getElementById(incomingId);
       const pin = document.getElementById(pinId);
       const bg = document.getElementById(bgId);
-      const syncedBg = pin ? pin.querySelector('.hero-xray-bg') : null;
       const inner = innerId ? document.getElementById(innerId) : null;
       if(!incoming || !pin || !bg) return;
 
@@ -1193,17 +1187,9 @@
           if(variant === 'zoom'){
             bg.style.transform = `scale(${1 + progress * 0.14})`;
           } else {
-            const yShift = progress * -6;
-            bg.style.transform = `translateY(${yShift}%)`;
-            if(syncedBg){
-              // Preserve the scan portrait's optical alignment while applying
-              // the exact same scroll movement as the normal portrait.
-              syncedBg.style.transform = `translate(-1%, ${-1 + yShift}%) scale(0.96)`;
-            }
+            bg.style.transform = `translateY(${progress * -6}%)`;
           }
-          const brightness = 1 - progress * 0.42;
-          bg.style.filter = `brightness(${brightness})`;
-          if(syncedBg) syncedBg.style.filter = `brightness(${brightness})`;
+          bg.style.filter = `brightness(${1 - progress * 0.42})`;
 
           if(inner){
             inner.style.opacity = String(Math.max(0, 1 - progress * 1.35));

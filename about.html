@@ -95,11 +95,22 @@
 
     /* ===== SELECTED CLIENTS ===== */
     .clients-region-label{ font-size:12px; font-weight:600; color: var(--accent); text-transform:uppercase; letter-spacing:.08em; margin-bottom:20px; }
-    .client-grid{ display:flex; flex-wrap:wrap; gap:12px; margin-bottom:48px; }
-    .client-item{
-      font-size:13px; font-weight:500; color: var(--text-primary);
-      background: var(--surface); border:1px solid var(--border); border-radius:999px;
-      padding:9px 18px;
+    .client-roster{
+      display:flex; flex-wrap:wrap; align-items:baseline;
+      padding-top:22px; border-top:1px solid var(--border);
+      margin-bottom:48px;
+    }
+    .client-name{
+      font-size:15px; font-weight:500; color: var(--text-primary);
+      line-height:1.7; letter-spacing:.01em;
+    }
+    .client-name:not(:last-child)::after{
+      content:"";
+      display:inline-block;
+      width:4px; height:4px;
+      background: var(--accent);
+      margin:0 16px 2px;
+      vertical-align:middle;
     }
 
     .reveal{ opacity:0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
@@ -144,7 +155,6 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html" class="active">About</a></li>
         <li><a href="index.html#work">Work</a></li>
-        <li><a href="contact.html">Contact</a></li>
       </ul>
       <a href="contact.html" class="btn btn-solid"><span class="btn-icon">&#8594;</span><span class="cta-label">Get in touch</span></a>
     </nav>
@@ -227,51 +237,59 @@
       <span class="eyebrow reveal">Selected Clients</span>
 
       <p class="clients-region-label reveal">Cambodia</p>
-      <div class="client-grid reveal">
-        <div class="client-item">McLaren</div>
-        <div class="client-item">Aston Martin</div>
-        <div class="client-item">Rolls-Royce</div>
-        <div class="client-item">BMW</div>
-        <div class="client-item">Lamborghini</div>
-        <div class="client-item">BYD</div>
-        <div class="client-item">Heineken</div>
-        <div class="client-item">Tiger Beer</div>
-        <div class="client-item">Nestlé</div>
-        <div class="client-item">KitKat</div>
-        <div class="client-item">Maggi</div>
-        <div class="client-item">Nescafé</div>
-        <div class="client-item">Grab</div>
-        <div class="client-item">G-Shock</div>
-        <div class="client-item">Unilever</div>
-        <div class="client-item">Coca-Cola</div>
-        <div class="client-item">Smart Axiata</div>
-        <div class="client-item">ABA Bank</div>
-        <div class="client-item">Manulife</div>
-        <div class="client-item">Hard Rock Cafe</div>
-        <div class="client-item">UNFPA</div>
-        <div class="client-item">JTI</div>
-        <div class="client-item">Total Energies</div>
-        <div class="client-item">Danone</div>
+      <div class="client-roster reveal">
+        <div class="client-name">McLaren</div>
+        <div class="client-name">Aston Martin</div>
+        <div class="client-name">Rolls-Royce</div>
+        <div class="client-name">BMW</div>
+        <div class="client-name">Lamborghini</div>
+        <div class="client-name">BYD</div>
+        <div class="client-name">Heineken</div>
+        <div class="client-name">Tiger Beer</div>
+        <div class="client-name">Nestlé</div>
+        <div class="client-name">KitKat</div>
+        <div class="client-name">Maggi</div>
+        <div class="client-name">Nescafé</div>
+        <div class="client-name">Grab</div>
+        <div class="client-name">G-Shock</div>
+        <div class="client-name">Unilever</div>
+        <div class="client-name">Coca-Cola</div>
+        <div class="client-name">Smart Axiata</div>
+        <div class="client-name">ABA Bank</div>
+        <div class="client-name">Manulife</div>
+        <div class="client-name">Hard Rock Cafe</div>
+        <div class="client-name">UNFPA</div>
+        <div class="client-name">JTI</div>
+        <div class="client-name">Total Energies</div>
+        <div class="client-name">Danone</div>
+        <div class="client-name">Botanico Brewing Company</div>
+        <div class="client-name">Botanico Craft Beer Garden</div>
+        <div class="client-name">Knorr</div>
+        <div class="client-name">Urban Beerhouse</div>
+        <div class="client-name">Metfone</div>
+        <div class="client-name">Black Panther Beer</div>
+        <div class="client-name">Anchor Beer</div>
+        <div class="client-name">Winston</div>
       </div>
 
       <p class="clients-region-label reveal">Philippines</p>
-      <div class="client-grid reveal">
-        <div class="client-item">Coca-Cola</div>
-        <div class="client-item">Globe Telecom</div>
-        <div class="client-item">San Miguel</div>
-        <div class="client-item">Apple</div>
-        <div class="client-item">Honda Motors</div>
-        <div class="client-item">Volvo Cars</div>
-        <div class="client-item">Security Bank</div>
-        <div class="client-item">EastWest Bank</div>
-        <div class="client-item">Banco de Oro</div>
-        <div class="client-item">Sun Life Financial</div>
-        <div class="client-item">Johnson &amp; Johnson</div>
-        <div class="client-item">Caltex</div>
-        <div class="client-item">Selecta</div>
-        <div class="client-item">Avon</div>
-        <div class="client-item">Maxicare</div>
-        <div class="client-item">Smart Communications</div>
+      <div class="client-roster reveal">
+        <div class="client-name">Coca-Cola</div>
+        <div class="client-name">Globe Telecom</div>
+        <div class="client-name">San Miguel</div>
+        <div class="client-name">Apple</div>
+        <div class="client-name">Honda Motors</div>
+        <div class="client-name">Volvo Cars</div>
+        <div class="client-name">Security Bank</div>
+        <div class="client-name">EastWest Bank</div>
+        <div class="client-name">Banco de Oro</div>
+        <div class="client-name">Sun Life Financial</div>
+        <div class="client-name">Johnson &amp; Johnson</div>
+        <div class="client-name">Caltex</div>
+        <div class="client-name">Selecta</div>
+        <div class="client-name">Avon</div>
+        <div class="client-name">Maxicare</div>
+        <div class="client-name">Smart Communications</div>
       </div>
     </div>
   </section>

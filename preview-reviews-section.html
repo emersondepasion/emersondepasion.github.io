@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>PREVIEW ONLY — Client Reviews section</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root{ --font:'Inter',sans-serif; --accent:#FF462E; }
+    * { font-family: var(--font); }
+    body{
+      --ground:#FFFFFF; --surface:#F3F2EF; --surface-2:#EAE8E3;
+      --text-primary:#121212; --text-secondary:#6B6B66; --border: rgba(0,0,0,.12);
+      background: var(--ground); color: var(--text-primary); margin:0;
+    }
+    section{ position:relative; }
+    .section-inner{ max-width:1280px; margin:0 auto; padding:0 32px; }
+    .section-pad{ padding: 96px 0; }
+    .light-zone.tint{ background:#F5F4F3; }
+    .plus-divider{ position:relative; height:1px; background: var(--border); }
+    .plus-divider span{
+      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      background:#FFFFFF; padding:0 12px; font-size:13px; color: var(--text-secondary); line-height:1;
+    }
+    .eyebrow{ font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color: var(--accent); margin-bottom:20px; display:block; }
+    .section-title{ font-weight:700; font-size:clamp(30px,4vw,56px); line-height:1.05; letter-spacing:-0.01em; color: var(--text-primary); max-width:820px; }
+    .contact-grid{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:48px; }
+    .contact-list{ margin-top:32px; }
+    .contact-list a, .contact-list p{ display:block; font-size:15px; color: var(--text-secondary); text-decoration:none; margin-bottom:8px; }
+
+    /* ===== CLIENT REVIEWS (new) ===== */
+    .reviews-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; margin-top:56px; }
+    .review-card{ background: var(--surface); border-radius:16px; padding:32px; display:flex; flex-direction:column; }
+    .review-quote-mark{ font-family: Georgia, serif; font-size:44px; line-height:1; color: var(--accent); font-weight:700; margin-bottom:8px; display:block; }
+    .review-text{ font-size:15px; line-height:1.75; color: var(--text-primary); margin:0 0 24px; flex-grow:1; }
+    .review-author{ display:flex; flex-direction:column; gap:2px; padding-top:16px; border-top:1px solid var(--border); }
+    .review-name{ font-size:14px; font-weight:600; color: var(--text-primary); }
+    .review-role{ font-size:12px; color: var(--text-secondary); }
+    @media (max-width:900px){ .reviews-grid{ grid-template-columns:1fr; } }
+
+    /* preview chrome only, not part of the real site */
+    .preview-banner{
+      background:#121212; color:#fff; text-align:center; padding:14px 20px; font-size:13px;
+      letter-spacing:.03em; position:sticky; top:0; z-index:99;
+    }
+    .preview-banner strong{ color:#FF9A85; }
+  </style>
+</head>
+<body>
+
+  <div class="preview-banner">PREVIEW ONLY — this file is not linked from the live site. Card text below is <strong>placeholder</strong>, not a real client quote.</div>
+
+  <!-- CLIENT REVIEWS — proposed new section -->
+  <section class="section-pad">
+    <div class="plus-divider" style="--pd-bg:#FFFFFF"><span>+</span></div>
+    <div class="section-inner" style="padding-top:56px;">
+      <span class="eyebrow">Client Reviews</span>
+      <h2 class="section-title">What Clients Say.</h2>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <span class="review-quote-mark">&#8220;</span>
+          <p class="review-text">Placeholder — this is where an approved client quote will appear once you approve one from the submission form.</p>
+          <div class="review-author">
+            <span class="review-name">Sample Name</span>
+            <span class="review-role">Role, Company</span>
+          </div>
+        </div>
+        <div class="review-card">
+          <span class="review-quote-mark">&#8220;</span>
+          <p class="review-text">Placeholder — this is where an approved client quote will appear once you approve one from the submission form.</p>
+          <div class="review-author">
+            <span class="review-name">Sample Name</span>
+            <span class="review-role">Role, Company</span>
+          </div>
+        </div>
+        <div class="review-card">
+          <span class="review-quote-mark">&#8220;</span>
+          <p class="review-text">Placeholder — this is where an approved client quote will appear once you approve one from the submission form.</p>
+          <div class="review-author">
+            <span class="review-name">Sample Name</span>
+            <span class="review-role">Role, Company</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT — copied as-is from index.html, for context only -->
+  <section class="section-pad light-zone tint">
+    <div class="plus-divider" style="--pd-bg:#F5F4F3"><span>+</span></div>
+    <div class="section-inner contact-grid" style="padding-top:56px;">
+      <div>
+        <span class="eyebrow">Get In Touch</span>
+        <h2 class="section-title">Let's Work<br>Together.</h2>
+      </div>
+      <div class="contact-list">
+        <a href="mailto:emersondepasion@gmail.com">emersondepasion@gmail.com</a>
+        <a href="tel:+855769666258">+855 0769 666 258</a>
+        <p>Phnom Penh, Cambodia</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
