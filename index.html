@@ -353,7 +353,9 @@
     }
     .review-card:hover .review-quote,
     .review-card:focus-within .review-quote{
-      block-size: calc-size(auto, size); opacity:1; padding:0 18px 22px;
+      block-size: auto; /* fallback — Safari/Firefox discard calc-size() below and use this instead */
+      block-size: calc-size(auto, size);
+      opacity:1; padding:0 18px 22px;
       transition: block-size .45s ease, opacity .35s ease .1s;
     }
     .review-quote-mark{ font-family: Georgia, serif; font-size:26px; line-height:1; color: var(--accent); font-weight:700; display:block; margin-bottom:4px; }
