@@ -363,9 +363,14 @@
       .review-card, .review-photo, .review-photo img, .review-quote{ transition:none !important; }
     }
     @media (max-width:860px){
-      .reviews-row{ flex-wrap:wrap; }
-      .review-card{ flex:1 1 calc(50% - 8px); }
+      /* Single column on mobile — a 2-up grid meant one expanding card shared a flex
+         "row" with its neighbor, and align-items:center stranded the shorter card
+         halfway down the tall shared row. Stacking avoids that entirely: each card
+         is its own row, so expanding one never affects another's position. */
+      .reviews-row{ flex-direction:column; align-items:stretch; }
+      .review-card{ flex:1 1 auto; }
       .review-card:hover, .review-card:focus-within{ flex-grow:1; }
+      .review-name, .review-role{ white-space:normal; overflow:visible; text-overflow:clip; }
     }
 
     .reviews-empty{ max-width:600px; margin:32px auto 0; text-align:center; }
