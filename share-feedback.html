@@ -113,8 +113,41 @@
 
     .form-status{ font-size:14px; line-height:1.7; padding:14px 18px; border-radius:10px; margin-bottom:22px; display:none; }
     .form-status.visible{ display:block; }
-    .form-status.success{ background: rgba(255,70,46,.08); color: var(--accent); }
     .form-status.error{ background: rgba(214,69,69,.08); color:#D64545; }
+
+    .form-success-panel{
+      display:none; text-align:center; background: var(--surface);
+      border-radius:20px; padding:72px 40px; margin-bottom:22px;
+      opacity:1; transform:none;
+      transition: display .5s, opacity .5s ease, transform .5s cubic-bezier(.22,1,.36,1);
+      transition-behavior: allow-discrete;
+    }
+    @starting-style{
+      .form-success-panel{ opacity:0; transform: translateY(16px) scale(.98); }
+    }
+    .form-success-icon{
+      width:56px; height:56px; border-radius:50%; background: var(--accent); color:#fff;
+      display:flex; align-items:center; justify-content:center; margin:0 auto 24px;
+    }
+    .form-success-check path{
+      stroke-dasharray:24; stroke-dashoffset:24;
+    }
+    .form-success-panel.visible .form-success-check path{
+      animation: form-success-draw .5s ease .3s forwards;
+    }
+    @keyframes form-success-draw{ to{ stroke-dashoffset:0; } }
+    .form-success-title{
+      font-weight:700; font-size:clamp(24px,3vw,32px); color: var(--text-primary); margin:0 0 14px;
+    }
+    .form-success-text{
+      font-size:15px; line-height:1.75; color: var(--text-secondary); max-width:440px; margin:0 auto;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .form-success-panel{ transform:none !important; transition-duration:.15s; }
+      @starting-style{ .form-success-panel{ transform:none; } }
+      .form-success-check path{ stroke-dashoffset:0 !important; animation:none !important; }
+    }
 
     .reveal{ opacity:0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.in-view{ opacity:1; transform:none; }
@@ -182,7 +215,7 @@
   <section class="section-pad">
     <div class="section-inner">
       <div class="reveal" style="margin:0 auto; max-width:640px;">
-        <div data-fs-success class="form-status success"></div>
+        <div data-fs-success class="form-success-panel"></div>
         <div data-fs-error class="form-status error">Something went wrong — please try again, or email your note directly to emersondepasion@gmail.com.</div>
 
         <form id="feedback-form" class="feedback-form">
@@ -249,11 +282,24 @@
     (function(){
       const successBox = document.querySelector('[data-fs-success]');
       const errorBox = document.querySelector('[data-fs-error]');
-      if(successBox) successBox.textContent = "Thank you — this has been sent in for review. It won't appear on the site unless approved.";
+      const form = document.getElementById('feedback-form');
+      if(successBox){
+        successBox.innerHTML =
+          '<div class="form-success-icon"><svg class="form-success-check" viewBox="0 0 24 24" width="26" height="26" fill="none"><path d="M4 12.5L9.5 18L20 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+          '<p class="form-success-title">Thank You.</p>' +
+          '<p class="form-success-text">Your note has been sent in for review. It won\'t appear on the site unless approved — I\'ll take it from here.</p>';
+      }
+      let formHidden = false;
       const observer = new MutationObserver(()=>{
         [successBox, errorBox].forEach(box=>{
           if(!box) return;
-          box.classList.toggle('visible', box.style.display !== 'none' && box.offsetParent !== null && box.textContent.trim() !== '');
+          const isVisible = box.style.display !== 'none' && box.offsetParent !== null && box.textContent.trim() !== '';
+          box.classList.toggle('visible', isVisible);
+          if(box === successBox && isVisible && !formHidden && form){
+            formHidden = true;
+            form.style.display = 'none';
+            successBox.scrollIntoView({ behavior:'smooth', block:'center' });
+          }
         });
       });
       [successBox, errorBox].forEach(box=> box && observer.observe(box, { attributes:true, childList:true, attributeFilter:['style'] }));
