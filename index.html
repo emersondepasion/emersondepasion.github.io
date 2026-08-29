@@ -21,6 +21,7 @@
     :root{
       --font: 'Inter', sans-serif;
       --accent: #FF462E;
+      interpolate-size: allow-keywords;
     }
 
     * { font-family: var(--font); }
@@ -319,15 +320,54 @@
     .expertise-list{ list-style:none; }
     .expertise-list li{ font-size:15px; color: var(--text-primary); padding:12px 0; border-top:1px solid var(--border); }
 
-    /* ===== CLIENT REVIEWS ===== */
-    .reviews-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; margin-top:56px; }
-    .review-card{ background: var(--surface); border-radius:16px; padding:32px; display:flex; flex-direction:column; }
-    .review-quote-mark{ font-family: Georgia, serif; font-size:44px; line-height:1; color: var(--accent); font-weight:700; margin-bottom:8px; display:block; }
-    .review-text{ font-size:15px; line-height:1.75; color: var(--text-primary); margin:0 0 24px; flex-grow:1; }
-    .review-author{ display:flex; flex-direction:column; gap:2px; padding-top:16px; border-top:1px solid var(--border); }
-    .review-name{ font-size:14px; font-weight:600; color: var(--text-primary); }
-    .review-role{ font-size:12px; color: var(--text-secondary); }
-    @media (max-width:900px){ .reviews-grid{ grid-template-columns:1fr; } }
+    /* ===== CLIENT REVIEWS — expanding row ===== */
+    /* 4 even cards at rest, grayscale photos. Hover (or tab-focus) one and it grows while its
+       neighbors shrink to make room — no overlap — the photo goes full color, and the quote
+       fades in below the name/role. To add a 5th review: drop the photo in
+       assets/images/reviews/ and duplicate a .review-card block below, filling in the new
+       photo, name/role and quote. Pure CSS, no JS. */
+    .reviews-row{ display:flex; align-items:center; gap:16px; margin-top:48px; margin-bottom:40px; }
+    .review-card{
+      flex:1 1 0; min-width:0; background: var(--surface); border-radius:16px; overflow:hidden;
+      cursor:pointer; transition: flex-grow .5s cubic-bezier(.22,1,.36,1);
+    }
+    .review-card:hover, .review-card:focus-within{ flex-grow:4; }
+
+    .review-photo{ height:200px; overflow:hidden; transition: height .5s cubic-bezier(.22,1,.36,1); }
+    .review-photo img{
+      width:100%; height:100%; object-fit:cover; display:block;
+      filter:grayscale(1) brightness(.92); transition: filter .5s ease;
+    }
+    .review-card:hover .review-photo,
+    .review-card:focus-within .review-photo{ height:220px; }
+    .review-card:hover .review-photo img,
+    .review-card:focus-within .review-photo img{ filter:none; }
+
+    .review-caption{ padding:16px 18px; }
+    .review-name{ display:block; font-weight:700; font-size:14px; color: var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .review-role{ display:block; font-size:12px; color: var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    .review-quote{
+      block-size:0; overflow:hidden; opacity:0; padding:0 18px;
+      transition: block-size .45s ease, opacity .35s ease;
+    }
+    .review-card:hover .review-quote,
+    .review-card:focus-within .review-quote{
+      block-size: calc-size(auto, size); opacity:1; padding:0 18px 22px;
+      transition: block-size .45s ease, opacity .35s ease .1s;
+    }
+    .review-quote-mark{ font-family: Georgia, serif; font-size:26px; line-height:1; color: var(--accent); font-weight:700; display:block; margin-bottom:4px; }
+    .review-text{ font-size:13px; line-height:1.6; color: var(--text-primary); margin:0; }
+
+    @media (prefers-reduced-motion: reduce){
+      .review-card, .review-photo, .review-photo img, .review-quote{ transition:none !important; }
+    }
+    @media (max-width:860px){
+      .reviews-row{ flex-wrap:wrap; }
+      .review-card{ flex:1 1 calc(50% - 8px); }
+      .review-card:hover, .review-card:focus-within{ flex-grow:1; }
+    }
+
     .reviews-empty{ max-width:600px; margin:32px auto 0; text-align:center; }
     .reviews-empty p{ font-size:16px; line-height:1.8; color: var(--text-secondary); margin:0 0 32px; }
 
@@ -1102,8 +1142,66 @@
       <div class="section-inner" style="padding-top:56px;">
         <span class="section-eyebrow reveal"><span class="dot"></span>Client Reviews</span>
         <h2 class="section-title reveal">Don't Take My Word For It.</h2>
-        <div class="reviews-empty reveal">
-          <p>I value the people I work with, and I'd love to hear how that experience felt from your side. If we've worked together, you can be the first to share yours.</p>
+
+        <!--
+          To add a 5th review later: drop the photo in assets/images/reviews/, then duplicate
+          one of the .review-card blocks below and fill in the new photo, name/role and quote.
+          Pure CSS hover/focus interaction — no script to update.
+        -->
+        <div class="reviews-row reveal">
+
+          <div class="review-card" tabindex="0">
+            <div class="review-photo"><img src="assets/images/reviews/review-photo-1.jpg" alt=""></div>
+            <div class="review-caption">
+              <span class="review-name">Ken</span>
+              <span class="review-role">Managing Director, TMG</span>
+            </div>
+            <div class="review-quote">
+              <span class="review-quote-mark">&#8220;</span>
+              <p class="review-text">I had the pleasure of working closely with Emerson when he was our Senior Art Director, and what always stood out was how much he genuinely cared about the work.<br><br>He has a sharp visual eye and strong design instincts, but more importantly, he knows how to turn an idea into something polished, memorable and right for the brand. He was never satisfied with simply making things look good. He always pushed to make the work stronger.<br><br>He was also one of those people who made agency life easier. Calm, collaborative and open to different points of view, he worked well across creative, strategy and account teams while still taking real ownership of the work.<br><br>Emerson is a talented and thoughtful creative who takes pride in what he puts out into the world. I genuinely enjoyed working with him, and I would gladly do so again. &#129321;</p>
+            </div>
+          </div>
+
+          <div class="review-card" tabindex="0">
+            <div class="review-photo"><img src="assets/images/reviews/review-photo-2.jpg" alt=""></div>
+            <div class="review-caption">
+              <span class="review-name">Anthony Keck</span>
+              <span class="review-role">Chief Executive Officer, TMG</span>
+            </div>
+            <div class="review-quote">
+              <span class="review-quote-mark">&#8220;</span>
+              <p class="review-text">After 40 years of working in advertising across Australia and Asia, and working closely with creative teams in New York and London, I doubt I've met a better designer than Emerson. He had the ability to make average ideas look like world class, and good ideas to look like magic. He's serious and dedicated and a person you could always rely on to make the agency a better place. If you are after a creative with talent and dedication and who happens to also be an all round good person, then look no further than Emerson...</p>
+            </div>
+          </div>
+
+          <div class="review-card" tabindex="0">
+            <div class="review-photo"><img src="assets/images/reviews/review-photo-3.jpg" alt=""></div>
+            <div class="review-caption">
+              <span class="review-name">Glen de Leon</span>
+              <span class="review-role">Colleague</span>
+            </div>
+            <div class="review-quote">
+              <span class="review-quote-mark">&#8220;</span>
+              <p class="review-text">Emerson's expertise extends far beyond graphic design. He is a seasoned project manager, a skilled client relationship builder, and a forward-thinking professional proficient in deploying AI agents to streamline complex operational workflows. Having collaborated with him across several high-impact initiatives—ranging from digital marketing campaigns to large-scale event execution—I can attest to his versatility and execution. I look forward to partnering with him on future projects.</p>
+            </div>
+          </div>
+
+          <div class="review-card" tabindex="0">
+            <div class="review-photo"><img src="assets/images/reviews/review-photo-4.jpg" alt=""></div>
+            <div class="review-caption">
+              <span class="review-name">Crimson</span>
+              <span class="review-role">Designer</span>
+            </div>
+            <div class="review-quote">
+              <span class="review-quote-mark">&#8220;</span>
+              <p class="review-text">During my freelance work, I had the opportunity to work with Emerson on a project. His creative thinking and attention to detail really stood out to me, especially in his logo collection. I love how each identity feels unique, intentional, and thoughtfully crafted.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="reviews-empty reveal" style="margin-top:56px;">
+          <p>I value the people I work with, and I'd love to hear how that experience felt from your side — if we've worked together, I'd love to add yours here too.</p>
           <a href="share-feedback.html" class="btn btn-solid"><span class="btn-icon">&#8594;</span><span class="cta-label">Share Your Experience</span></a>
         </div>
       </div>
@@ -1328,6 +1426,7 @@
       window.addEventListener('resize', updateNav);
       updateNav();
     })();
+
   </script>
 
 </body>
