@@ -384,8 +384,11 @@
          lines the role text wraps to (longest current one — Ram's — wraps to 3
          lines). Desktop-only: on mobile the cards stack in a single column, so
          there's no row to align and this would just add dead space under captions
-         that don't need it. */
-      .review-caption{ min-height:132px; box-sizing:border-box; }
+         that don't need it. Released back to natural height on hover/focus so the
+         quote sits directly under the name/role instead of leaving a gap when a
+         card's own role text is shorter than the tallest one in the row. */
+      .review-caption{ min-height:132px; box-sizing:border-box; transition: min-height .5s cubic-bezier(.22,1,.36,1); }
+      .review-card:hover .review-caption, .review-card:focus-within .review-caption{ min-height:0; }
     }
 
     .reviews-empty{ max-width:600px; margin:32px auto 0; text-align:center; }
