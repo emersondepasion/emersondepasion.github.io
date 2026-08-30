@@ -320,58 +320,101 @@
     .expertise-list{ list-style:none; }
     .expertise-list li{ font-size:15px; color: var(--text-primary); padding:12px 0; border-top:1px solid var(--border); }
 
-    /* ===== CLIENT REVIEWS — expanding row ===== */
-    /* 4 even cards at rest, grayscale photos. Hover (or tab-focus) one and it grows while its
-       neighbors shrink to make room — no overlap — the photo goes full color, and the quote
-       fades in below the name/role. To add a 5th review: drop the photo in
-       assets/images/reviews/ and duplicate a .review-card block below, filling in the new
-       photo, name/role and quote. Pure CSS, no JS. */
-    .reviews-row{ display:flex; align-items:center; gap:16px; margin-top:48px; margin-bottom:40px; }
-    .review-card{
-      flex:1 1 0; min-width:0; background: var(--surface); border-radius:16px; overflow:hidden;
-      cursor:pointer; transition: flex-grow .5s cubic-bezier(.22,1,.36,1);
-    }
-    .review-card:hover, .review-card:focus-within{ flex-grow:4; }
+    /* ===== CLIENT REVIEWS — fixed cards, hover excerpt, click-to-open full review ===== */
+    /* Cards stay a fixed size (no more flex-grow layout animation). Hovering (desktop,
+       fine-pointer only) reveals a dark excerpt overlay on the photo with a short genuine
+       quote and a "click for full review" cue. Clicking (or Enter/Space on focus) opens a
+       full-detail panel below the row — photo plus complete name/role/quote — animated with
+       a FLIP-style morph from the clicked card via the Web Animations API (JS below, in the
+       page's closing <script> block). To add a 5th review: drop the photo in
+       assets/images/reviews/, duplicate a .review-card block, and add a matching entry to
+       the `highlights` object in the JS — the rest wires up automatically. */
+    #reviews-preview{ scroll-margin-top:88px; }
+    .reviews-row{ display:flex; align-items:stretch; gap:16px; margin-top:48px; margin-bottom:40px; min-height:0; }
 
-    .review-photo{ height:200px; overflow:hidden; transition: height .5s cubic-bezier(.22,1,.36,1); }
+    .review-card,
+    .review-card:hover,
+    .review-card:focus-within{
+      position:relative; flex:1 1 0; min-width:0; background: var(--surface);
+      border-radius:16px; overflow:hidden; border:1px solid transparent; cursor:pointer;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .review-card:hover,
+    .review-card:focus-visible,
+    .review-card[aria-expanded="true"]{
+      border-color: rgba(255,70,46,.55); box-shadow: 0 14px 32px rgba(0,0,0,.10); outline:none;
+    }
+
+    .review-photo{ position:relative; height:200px; overflow:hidden; }
     .review-photo img{
       width:100%; height:100%; object-fit:cover; display:block;
-      filter:grayscale(1) brightness(.92); transition: filter .5s ease;
+      filter:grayscale(1) brightness(.92); transition: filter .24s ease-out;
     }
-    .review-card:hover .review-photo,
-    .review-card:focus-within .review-photo{ height:220px; }
     .review-card:hover .review-photo img,
-    .review-card:focus-within .review-photo img{ filter:none; }
+    .review-card:focus-visible .review-photo img,
+    .review-card[aria-expanded="true"] .review-photo img{ filter:none; }
 
-    .review-caption{ padding:16px 18px; }
+    .review-caption,
+    .review-card:hover .review-caption,
+    .review-card:focus-within .review-caption{ height:132px; min-height:132px; box-sizing:border-box; padding:16px 18px; }
     .review-name{ display:block; font-weight:700; font-size:14px; color: var(--text-primary); }
     .review-role{ display:block; font-size:12px; color: var(--text-secondary); }
 
-    .review-quote{
-      block-size:0; overflow:hidden; opacity:0; padding:0 18px;
-      transition: block-size .45s ease, opacity .35s ease;
-    }
-    .review-card:hover .review-quote,
-    .review-card:focus-within .review-quote{
-      block-size: auto; /* fallback — Safari/Firefox discard calc-size() below and use this instead */
-      block-size: calc-size(auto, size);
-      opacity:1; padding:0 18px 22px;
-      transition: block-size .45s ease, opacity .35s ease .1s;
-    }
+    /* The full quote still lives in the markup (for the click-to-open panel and for
+       no-JS/no-CSS fallback) but is not shown inline on the card itself anymore. */
+    .review-card .review-quote{ display:none !important; }
     .review-quote-mark{ font-family: Georgia, serif; font-size:26px; line-height:1; color: var(--accent); font-weight:700; display:block; margin-bottom:4px; }
     .review-text{ font-size:13px; line-height:1.6; color: var(--text-primary); margin:0; }
 
-    @media (prefers-reduced-motion: reduce){
-      .review-card, .review-photo, .review-photo img, .review-quote{ transition:none !important; }
+    .review-hover-excerpt{
+      position:absolute; left:10px; right:10px; bottom:10px; padding:12px 12px 11px;
+      border-radius:10px; background: rgba(13,13,13,.90); color:#fff;
+      opacity:0; visibility:hidden; transform: translateY(7px);
+      transition: opacity .2s ease, transform .2s ease, visibility .2s ease; pointer-events:none;
     }
+    .review-highlight{
+      display:-webkit-box; overflow:hidden; -webkit-box-orient:vertical; -webkit-line-clamp:3;
+      font-size:12px; line-height:1.45; font-weight:500;
+    }
+    .review-read-cue{
+      display:block; margin-top:7px; color:#FF725F; font-size:10px; font-weight:700;
+      letter-spacing:.08em; text-transform:uppercase;
+    }
+    @media (hover:hover){
+      .review-card:hover .review-hover-excerpt,
+      .review-card:focus-visible .review-hover-excerpt{ opacity:1; visibility:visible; transform:none; }
+    }
+
+    .review-full-panel{
+      position:relative; display:grid; grid-template-columns:280px minmax(0,1fr);
+      margin-top:24px; overflow:hidden; border:1px solid rgba(0,0,0,.10); border-radius:20px;
+      background: var(--surface); box-shadow: 0 24px 60px rgba(0,0,0,.12); transform-origin: top left;
+    }
+    .review-full-panel[hidden]{ display:none; }
+    .review-full-photo{ min-height:330px; background: var(--surface-2); }
+    .review-full-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .review-full-content{ padding:44px 52px 48px; }
+    .review-full-kicker{ color: var(--accent); font-size:11px; font-weight:700; letter-spacing:.10em; text-transform:uppercase; }
+    .review-full-name{ display:block; margin-top:14px; font-size:26px; line-height:1.15; font-weight:800; color: var(--text-primary); }
+    .review-full-role{ display:block; margin-top:7px; padding-right:120px; font-size:13px; color: var(--text-secondary); }
+    .review-full-mark{ display:block; margin-top:28px; color: var(--accent); font-family: Georgia, serif; font-size:38px; font-weight:700; line-height:.8; }
+    .review-full-text{ max-width:760px; margin:13px 0 0; color: var(--text-primary); font-size:16px; line-height:1.72; }
+    .review-close{
+      position:absolute; top:20px; right:20px; min-height:40px; padding:0 15px;
+      border:1px solid rgba(0,0,0,.16); border-radius:999px; background:#fff; color:#121212;
+      font:600 12px/1 var(--font); cursor:pointer;
+    }
+    .review-close:hover, .review-close:focus-visible{ border-color: var(--accent); color: var(--accent); outline:none; }
+
     @media (max-width:860px){
-      /* Single column on mobile — a 2-up grid meant one expanding card shared a flex
-         "row" with its neighbor, and align-items:center stranded the shorter card
-         halfway down the tall shared row. Stacking avoids that entirely: each card
-         is its own row, so expanding one never affects another's position. */
+      .review-card, .review-card:hover, .review-card:focus-within{ flex:1 1 auto; }
       .reviews-row{ flex-direction:column; align-items:stretch; }
-      .review-card{ flex:1 1 auto; }
-      .review-card:hover, .review-card:focus-within{ flex-grow:1; }
+      .review-hover-excerpt{ display:none; }
+      .review-full-panel{ grid-template-columns:1fr; }
+      .review-full-photo{ min-height:0; height:260px; }
+      .review-full-content{ padding:32px 24px 36px; }
+      .review-full-role{ padding-right:0; }
+      .review-close{ top:14px; right:14px; }
     }
     @media (min-width:861px){
       /* Desktop-only bump — name/role/quote read a bit small at rest. Scoped here so
@@ -379,16 +422,9 @@
       .review-name{ font-size:16px; }
       .review-role{ font-size:13px; }
       .review-text{ font-size:15px; }
-
-      /* Fixed min-height so every card in the row matches regardless of how many
-         lines the role text wraps to (longest current one — Ram's — wraps to 3
-         lines). Desktop-only: on mobile the cards stack in a single column, so
-         there's no row to align and this would just add dead space under captions
-         that don't need it. Released back to natural height on hover/focus so the
-         quote sits directly under the name/role instead of leaving a gap when a
-         card's own role text is shorter than the tallest one in the row. */
-      .review-caption{ min-height:132px; box-sizing:border-box; transition: min-height .5s cubic-bezier(.22,1,.36,1); }
-      .review-card:hover .review-caption, .review-card:focus-within .review-caption{ min-height:0; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .review-card, .review-photo img, .review-hover-excerpt{ transition:none !important; }
     }
 
     .reviews-empty{ max-width:600px; margin:32px auto 0; text-align:center; }
@@ -1160,7 +1196,7 @@
     </section>
 
     <!-- CLIENT REVIEWS -->
-    <section class="section-pad" style="padding-top:24px;">
+    <section id="reviews-preview" class="section-pad" style="padding-top:24px;">
       <div class="plus-divider" style="--pd-bg:#FFFFFF"><span>+</span></div>
       <div class="section-inner" style="padding-top:56px;">
         <span class="section-eyebrow reveal"><span class="dot"></span>Client Reviews</span>
@@ -1168,8 +1204,9 @@
 
         <!--
           To add a 5th review later: drop the photo in assets/images/reviews/, then duplicate
-          one of the .review-card blocks below and fill in the new photo, name/role and quote.
-          Pure CSS hover/focus interaction — no script to update.
+          one of the .review-card blocks below, filling in the new photo, name/role and quote —
+          then add a matching entry to the `highlights` object in the Client Reviews script
+          near the end of the page (used for the hover-excerpt teaser).
         -->
         <div class="reviews-row reveal">
 
@@ -1484,6 +1521,188 @@
       window.addEventListener('scroll', updateNav, { passive:true });
       window.addEventListener('resize', updateNav);
       updateNav();
+    })();
+
+    // Client Reviews: hover excerpt teaser + click-to-open full review.
+    // Each highlight below is a genuine, complete sentence pulled verbatim from that
+    // person's full review (see the matching .review-text) — not a paraphrase — so update
+    // this object with an exact sentence from the real quote whenever a review is added.
+    (function(){
+      const section = document.getElementById('reviews-preview');
+      const row = section?.querySelector('.reviews-row');
+      const cards = row ? [...row.querySelectorAll('.review-card')] : [];
+      if(!section || !row || !cards.length) return;
+
+      const highlights = {
+        'Ken': 'He always pushed to make the work stronger.',
+        'Anthony Keck': "I doubt I've met a better designer than Emerson.",
+        'Glen de Leon': "Emerson's expertise extends far beyond graphic design.",
+        'Joey Espinueva': 'A truly well-rounded creative professional and a truly nice guy to work with.',
+        'Ram': 'What I particularly appreciate about Emerson is his adaptability.',
+        'Paul Rosel': 'He takes the time to understand what is needed and turns ideas into clean, well-crafted visuals.',
+        'Crimson': 'I love how each identity feels unique, intentional, and thoughtfully crafted.'
+      };
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const panel = document.createElement('article');
+      panel.className = 'review-full-panel';
+      panel.id = 'review-full-panel';
+      panel.hidden = true;
+      panel.setAttribute('aria-hidden','true');
+      panel.innerHTML = `
+        <button class="review-close" type="button">Close review</button>
+        <div class="review-full-photo"><img src="" alt=""></div>
+        <div class="review-full-content">
+          <span class="review-full-kicker">Full recommendation</span>
+          <span class="review-full-name"></span>
+          <span class="review-full-role"></span>
+          <span class="review-full-mark">&#8220;</span>
+          <p class="review-full-text"></p>
+        </div>`;
+      row.insertAdjacentElement('afterend',panel);
+
+      const panelPhoto = panel.querySelector('.review-full-photo img');
+      const panelName = panel.querySelector('.review-full-name');
+      const panelRole = panel.querySelector('.review-full-role');
+      const panelText = panel.querySelector('.review-full-text');
+      const closeButton = panel.querySelector('.review-close');
+      let activeCard = null;
+      let closeTimer = null;
+      let scrollCloseArmed = false;
+      let scrollArmTimer = null;
+
+      cards.forEach((card,index)=>{
+        const name = card.querySelector('.review-name')?.textContent.trim() || `Reviewer ${index + 1}`;
+        const photo = card.querySelector('.review-photo');
+        const image = photo?.querySelector('img');
+        if(image && !image.alt) image.alt = `${name} portrait`;
+
+        const excerpt = document.createElement('div');
+        excerpt.className = 'review-hover-excerpt';
+        excerpt.innerHTML = `<span class="review-highlight">&#8220;${highlights[name] || ''}&#8221;</span><span class="review-read-cue">Click for full review</span>`;
+        photo?.appendChild(excerpt);
+
+        card.setAttribute('role','button');
+        card.setAttribute('aria-controls',panel.id);
+        card.setAttribute('aria-expanded','false');
+        card.setAttribute('aria-label',`Read full review from ${name}`);
+        card.addEventListener('click',()=>{
+          if(activeCard === card) closePanel(true);
+          else openPanel(card);
+        });
+        card.addEventListener('keydown',(event)=>{
+          if(event.key !== 'Enter' && event.key !== ' ') return;
+          event.preventDefault();
+          card.click();
+        });
+      });
+
+      function setPanelContent(card){
+        const name = card.querySelector('.review-name')?.textContent.trim() || '';
+        const role = card.querySelector('.review-role')?.textContent.trim() || '';
+        const image = card.querySelector('.review-photo img');
+        const text = card.querySelector('.review-text');
+        panelPhoto.src = image?.src || '';
+        panelPhoto.alt = image?.alt || `${name} portrait`;
+        panelName.textContent = name;
+        panelRole.textContent = role;
+        panelText.innerHTML = text?.innerHTML || '';
+      }
+
+      function openPanel(card){
+        if(closeTimer){ window.clearTimeout(closeTimer); closeTimer = null; }
+        if(scrollArmTimer){ window.clearTimeout(scrollArmTimer); scrollArmTimer = null; }
+        scrollCloseArmed = false;
+        panel.getAnimations().forEach(animation=>animation.cancel());
+        if(activeCard) activeCard.setAttribute('aria-expanded','false');
+        activeCard = card;
+        activeCard.setAttribute('aria-expanded','true');
+        const source = card.getBoundingClientRect();
+        setPanelContent(card);
+        panel.hidden = false;
+        panel.setAttribute('aria-hidden','false');
+
+        requestAnimationFrame(()=>{
+          const target = panel.getBoundingClientRect();
+          if(!reduceMotion && target.width && target.height){
+            const dx = source.left - target.left;
+            const dy = source.top - target.top;
+            const sx = Math.max(.12, source.width / target.width);
+            const sy = Math.max(.12, source.height / target.height);
+            panel.animate([
+              { transform:`translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`, opacity:.25, borderRadius:'16px' },
+              { transform:'translate(0,0) scale(1,1)', opacity:1, borderRadius:'20px' }
+            ],{ duration:440, easing:'cubic-bezier(.22,1,.36,1)', fill:'both' });
+          }
+          window.setTimeout(()=>panel.scrollIntoView({ behavior:reduceMotion ? 'auto' : 'smooth', block:'nearest' }),reduceMotion ? 0 : 260);
+          scrollArmTimer = window.setTimeout(()=>{ scrollCloseArmed = true; },900);
+        });
+      }
+
+      function finishClose(restoreFocus){
+        if(closeTimer){ window.clearTimeout(closeTimer); closeTimer = null; }
+        if(scrollArmTimer){ window.clearTimeout(scrollArmTimer); scrollArmTimer = null; }
+        scrollCloseArmed = false;
+        panel.getAnimations().forEach(animation=>animation.cancel());
+        const previous = activeCard;
+        previous?.setAttribute('aria-expanded','false');
+        activeCard = null;
+        panel.hidden = true;
+        panel.setAttribute('aria-hidden','true');
+        panel.removeAttribute('style');
+        if(restoreFocus) previous?.focus({ preventScroll:true });
+      }
+
+      function closePanel(restoreFocus=false,immediate=false){
+        if(!activeCard || panel.hidden) return;
+        if(closeTimer){ window.clearTimeout(closeTimer); closeTimer = null; }
+        panel.getAnimations().forEach(animation=>animation.cancel());
+        const targetCard = activeCard;
+        if(reduceMotion || immediate){ finishClose(restoreFocus); return; }
+        const from = panel.getBoundingClientRect();
+        const target = targetCard.getBoundingClientRect();
+        const dx = target.left - from.left;
+        const dy = target.top - from.top;
+        const sx = Math.max(.12, target.width / from.width);
+        const sy = Math.max(.12, target.height / from.height);
+        panel.animate([
+          { transform:'translate(0,0) scale(1,1)', opacity:1, borderRadius:'20px' },
+          { transform:`translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`, opacity:0, borderRadius:'16px' }
+        ],{ duration:300, easing:'cubic-bezier(.4,0,.2,1)', fill:'both' });
+        closeTimer = window.setTimeout(()=>finishClose(restoreFocus),320);
+      }
+
+      closeButton.addEventListener('click',()=>closePanel(true));
+      document.addEventListener('keydown',(event)=>{
+        if(event.key === 'Escape') closePanel(true);
+      });
+
+      let reviewScrollTick = false;
+      window.addEventListener('scroll',()=>{
+        if(!activeCard || reviewScrollTick) return;
+        reviewScrollTick = true;
+        requestAnimationFrame(()=>{
+          reviewScrollTick = false;
+          const rowBounds = row.getBoundingClientRect();
+          const panelBounds = panel.getBoundingClientRect();
+          const reviewHasLeftView = panelBounds.bottom < 240 || rowBounds.top > window.innerHeight - 120;
+          if(reviewHasLeftView) closePanel(false,true);
+        });
+      },{ passive:true });
+
+      const panelVisibilityObserver = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(activeCard && scrollCloseArmed && entry.intersectionRatio < .05) closePanel(false,true);
+        });
+      },{ threshold:[0,.05,.2] });
+      panelVisibilityObserver.observe(panel);
+
+      window.setInterval(()=>{
+        if(!activeCard || !scrollCloseArmed || panel.hidden) return;
+        const rowBounds = row.getBoundingClientRect();
+        const panelBounds = panel.getBoundingClientRect();
+        if(panelBounds.bottom < 240 || rowBounds.top > window.innerHeight - 120) closePanel(false,true);
+      },200);
     })();
 
   </script>
