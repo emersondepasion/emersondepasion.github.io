@@ -379,6 +379,13 @@
       .review-name{ font-size:16px; }
       .review-role{ font-size:13px; }
       .review-text{ font-size:15px; }
+
+      /* Fixed min-height so every card in the row matches regardless of how many
+         lines the role text wraps to (longest current one — Ram's — wraps to 3
+         lines). Desktop-only: on mobile the cards stack in a single column, so
+         there's no row to align and this would just add dead space under captions
+         that don't need it. */
+      .review-caption{ min-height:132px; box-sizing:border-box; }
     }
 
     .reviews-empty{ max-width:600px; margin:32px auto 0; text-align:center; }
