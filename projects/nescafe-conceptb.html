@@ -94,6 +94,27 @@
     .gallery-img.third{ grid-column: span 4; }
     .gallery-img img{ width:100%; height:auto; display:block; object-fit:cover; }
 
+    /* Mockup renders (truck, sampling counter, tuktuk) are transparent PNGs with
+       mismatched aspect ratios, so a plain 3-across row stretched every card to the
+       tallest sibling and left dead space under the shorter ones. A fixed aspect-ratio
+       + object-fit:contain gives every card in the row the same footprint, no cropping. */
+    .gallery-img.third{ aspect-ratio: 4 / 3; box-sizing: border-box; padding: 28px; }
+    .gallery-img.third img{ width:100%; height:100%; object-fit:contain; }
+
+    /* Standee + closing poster, side by side. They're different aspect ratios (the
+       standee is tall and narrow, the poster less so), so instead of forcing them into
+       equal-width boxes — which would badly letterbox one or the other — they share a
+       fixed height and each keeps its own natural width. Classic contact-sheet pairing. */
+    .gallery-duo{ grid-column: span 12; display:flex; gap:20px; justify-content:center; align-items:flex-start; flex-wrap:wrap; }
+    .gallery-duo .gallery-img{ flex:0 0 auto; max-width:100%; display:flex; }
+    .gallery-duo .gallery-img img{ height:640px; width:auto; max-width:100%; display:block; object-fit:contain; }
+
+    @media (max-width:768px){
+      .gallery-duo{ flex-direction:column; align-items:stretch; }
+      .gallery-duo .gallery-img{ display:block; }
+      .gallery-duo .gallery-img img{ height:auto; width:100%; }
+    }
+
     .project-pager{
       border-top:1px solid var(--border); padding-top:40px;
       display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px;
@@ -178,11 +199,13 @@
       </div>
 
       <div class="gallery">
-        <div class="gallery-img "><img src="../assets/images/nescafe-standee-main.jpg" alt="" loading="lazy"></div>
+        <div class="gallery-duo">
+          <div class="gallery-img hero-standee"><img src="../assets/images/nescafe-standee-main.jpg" alt="" loading="lazy"></div>
+          <div class="gallery-img hero-poster"><img src="../assets/images/nescafe-kny-poster.jpg" alt="" loading="lazy"></div>
+        </div>
         <div class="gallery-img third"><img src="../assets/images/nescafe-sampling-counter.png" alt="" loading="lazy"></div>
         <div class="gallery-img third"><img src="../assets/images/nescafe-truck.png" alt="" loading="lazy"></div>
         <div class="gallery-img third"><img src="../assets/images/nescafe-tuktuk.png" alt="" loading="lazy"></div>
-        <div class="gallery-img "><img src="../assets/images/nescafe-kny-poster.jpg" alt="" loading="lazy"></div>
       </div>
 
       <div class="project-pager">
