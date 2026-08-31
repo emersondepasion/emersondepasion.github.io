@@ -330,12 +330,16 @@
        assets/images/reviews/, duplicate a .review-card block, and add a matching entry to
        the `highlights` object in the JS — the rest wires up automatically. */
     #reviews-preview{ scroll-margin-top:88px; }
-    .reviews-row{ display:flex; align-items:stretch; gap:16px; margin-top:48px; margin-bottom:40px; min-height:0; }
+    /* Grid instead of one flex row — lets the cards wrap onto a second line once there
+       are enough of them, rather than all 9+ squeezing into a single increasingly-narrow
+       row. minmax(220px,1fr) keeps each card comfortably wide (roomy captions, no cramped
+       wrapping) and settles at 5 per row on a 1280px desktop row, wrapping the rest below. */
+    .reviews-row{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); align-items:stretch; gap:16px; margin-top:48px; margin-bottom:40px; min-height:0; }
 
     .review-card,
     .review-card:hover,
     .review-card:focus-within{
-      position:relative; flex:1 1 0; min-width:0; background: var(--surface);
+      position:relative; min-width:0; background: var(--surface);
       border-radius:16px; overflow:hidden; border:1px solid transparent; cursor:pointer;
       transition: border-color .2s ease, box-shadow .2s ease;
     }
@@ -407,8 +411,7 @@
     .review-close:hover, .review-close:focus-visible{ border-color: var(--accent); color: var(--accent); outline:none; }
 
     @media (max-width:860px){
-      .review-card, .review-card:hover, .review-card:focus-within{ flex:1 1 auto; }
-      .reviews-row{ flex-direction:column; align-items:stretch; }
+      .reviews-row{ grid-template-columns: 1fr; }
       .review-hover-excerpt{ display:none; }
       .review-full-panel{ grid-template-columns:1fr; }
       .review-full-photo{ min-height:0; height:260px; }
@@ -497,7 +500,7 @@
       <div class="hero-xray-mask" id="heroXrayMask"><div class="hero-xray-bg"></div></div>
       <div class="hero-overlay"></div>
       <div class="hero-inner" id="heroInner">
-        <span class="hero-kicker">Creative Director &amp; Designer &middot; Phnom Penh &amp; across Southeast Asia</span>
+        <span class="hero-kicker">Creative Director &amp; Designer &middot; Working across Asia, North America &amp; Africa</span>
         <h1 class="hero-name">Emerson<br><em>De Pasion</em></h1>
         <p class="hero-desc">Good design gets attention.<br>The right idea gives that attention meaning.</p>
       </div>
@@ -519,7 +522,7 @@
       <div class="plus-divider" style="--pd-bg:#FFFFFF"><span>+</span></div>
       <div class="section-inner" style="padding-top:56px;">
         <span class="section-eyebrow reveal"><span class="dot"></span>A Quick Intro</span>
-        <p class="intro-statement reveal"><span class="dot"></span>Seasoned creative professional with over 20 years of experience in advertising, branding, and strategic visual direction across the Philippines and Cambodia.</p>
+        <p class="intro-statement reveal"><span class="dot"></span>Seasoned Creative Director with over 20 years of experience in advertising, branding, and strategic visual direction across Asia, North America, and Africa.</p>
         <div class="intro-cta reveal">
           <a href="contact.html" class="btn btn-solid"><span class="btn-icon">&#8594;</span>Get in touch</a>
         </div>
@@ -1214,7 +1217,8 @@
             <div class="review-photo"><img src="assets/images/reviews/review-photo-1.jpg" alt=""></div>
             <div class="review-caption">
               <span class="review-name">Ken</span>
-              <span class="review-role">Managing Director, TMG</span>
+              <span class="review-role">Managing Director</span>
+              <span class="review-role">TMG</span>
             </div>
             <div class="review-quote">
               <span class="review-quote-mark">&#8220;</span>
@@ -1226,7 +1230,8 @@
             <div class="review-photo"><img src="assets/images/reviews/review-photo-2.jpg" alt=""></div>
             <div class="review-caption">
               <span class="review-name">Anthony Keck</span>
-              <span class="review-role">Chief Executive Officer, TMG</span>
+              <span class="review-role">Chief Executive Officer</span>
+              <span class="review-role">TMG</span>
             </div>
             <div class="review-quote">
               <span class="review-quote-mark">&#8220;</span>
@@ -1250,7 +1255,8 @@
             <div class="review-photo"><img src="assets/images/reviews/review-photo-7.jpg" alt=""></div>
             <div class="review-caption">
               <span class="review-name">Joey Espinueva</span>
-              <span class="review-role">Creative Lead, Digital Oven LA</span>
+              <span class="review-role">Creative Lead</span>
+              <span class="review-role">Digital Oven LA</span>
             </div>
             <div class="review-quote">
               <span class="review-quote-mark">&#8220;</span>
@@ -1262,7 +1268,8 @@
             <div class="review-photo"><img src="assets/images/reviews/review-photo-5.jpg" alt=""></div>
             <div class="review-caption">
               <span class="review-name">Ram</span>
-              <span class="review-role">Growth & Partnership Director, SparkX</span>
+              <span class="review-role">Growth & Partnership Director</span>
+              <span class="review-role">SparkX</span>
             </div>
             <div class="review-quote">
               <span class="review-quote-mark">&#8220;</span>
@@ -1274,11 +1281,38 @@
             <div class="review-photo"><img src="assets/images/reviews/review-photo-6.jpg" alt=""></div>
             <div class="review-caption">
               <span class="review-name">Paul Rosel</span>
-              <span class="review-role">Country Managing Director, The Binary Holdings</span>
+              <span class="review-role">Country Managing Director</span>
+              <span class="review-role">The Binary Holdings</span>
             </div>
             <div class="review-quote">
               <span class="review-quote-mark">&#8220;</span>
               <p class="review-text">I've had the pleasure of working with Emerson on a few graphics, and he has always been easy to work with and open to feedback. He takes the time to understand what is needed and turns ideas into clean, well-crafted visuals.<br><br>I appreciate his reliability, creativity, and willingness to make adjustments until the work is right. I'd be happy to work with him again and recommend him to others looking for a skilled and dependable graphic designer.</p>
+            </div>
+          </div>
+
+          <div class="review-card" tabindex="0">
+            <div class="review-photo"><img src="assets/images/reviews/review-photo-8.jpg" alt=""></div>
+            <div class="review-caption">
+              <span class="review-name">Sopagna Tuy</span>
+              <span class="review-role">Managing Director</span>
+              <span class="review-role">One Event Planner</span>
+            </div>
+            <div class="review-quote">
+              <span class="review-quote-mark">&#8220;</span>
+              <p class="review-text">I like working with Emong. He is very flexible and always offers creative input. His deliverables are always great, and he consistently meets deadlines.</p>
+            </div>
+          </div>
+
+          <div class="review-card" tabindex="0">
+            <div class="review-photo"><img src="assets/images/reviews/review-photo-9.jpg" alt=""></div>
+            <div class="review-caption">
+              <span class="review-name">Marco G&uuml;nther</span>
+              <span class="review-role">Director</span>
+              <span class="review-role">Botanico Brewing Company</span>
+            </div>
+            <div class="review-quote">
+              <span class="review-quote-mark">&#8220;</span>
+              <p class="review-text">We've worked with Emerson De Pasion for our rebranding in 2024. He was responsible to build all of the branding assets, including branding guidelines and logos. On top of that, Emerson helped us with the whole rebranding campaign.<br><br>Since then, we were able to really establish our brand and gain more and more recognition. This would not be possible, if it wasn't for an attractive and well-thought branding that doesn't just represent the spirit of our company, but can also lead us into the future.</p>
             </div>
           </div>
 
@@ -1540,7 +1574,9 @@
         'Joey Espinueva': 'A truly well-rounded creative professional and a truly nice guy to work with.',
         'Ram': 'What I particularly appreciate about Emerson is his adaptability.',
         'Paul Rosel': 'He takes the time to understand what is needed and turns ideas into clean, well-crafted visuals.',
-        'Crimson': 'I love how each identity feels unique, intentional, and thoughtfully crafted.'
+        'Crimson': 'I love how each identity feels unique, intentional, and thoughtfully crafted.',
+        'Sopagna Tuy': 'He is very flexible and always offers creative input.',
+        'Marco Günther': 'He was responsible to build all of the branding assets, including branding guidelines and logos.'
       };
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
