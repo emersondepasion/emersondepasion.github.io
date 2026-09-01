@@ -198,6 +198,15 @@
       z-index:4;
       background:#FFFFFF;
       isolation:isolate;
+      /* QA fix: the .viper-step "seam fix" below intentionally overlaps each column by
+         1px on both sides (see its own comment) to hide sub-pixel rounding gaps during
+         the scroll-wipe. The outermost column of the 5 consequently renders 1px past this
+         section's own right edge — never visible, but it was registering as real
+         page-level horizontal overflow (document.documentElement.scrollWidth = clientWidth
+         + 1). Clipping only that invisible 1px sliver here, at the section that owns it,
+         removes the scrollbar without touching the columns' widths/margins/overlap or the
+         scroll-linked transition JS in any way. */
+      overflow-x: clip;
     }
     .viper-steps{
       position:absolute;
@@ -435,6 +444,10 @@
     }
     @media (prefers-reduced-motion: reduce){
       .review-card, .review-photo img, .review-hover-excerpt{ transition:none !important; }
+      /* Section 5 requirement: marquees stop/become static for reduced-motion visitors
+         only — normal visitors are entirely unaffected, this rule only exists inside
+         this media query. */
+      .client-track, .partner-track{ animation:none !important; }
     }
 
     .reviews-empty{ max-width:600px; margin:32px auto 0; text-align:center; }
@@ -446,8 +459,17 @@
     .contact-list a, .contact-list p{ display:block; font-size:15px; color: var(--text-secondary); text-decoration:none; margin-bottom:8px; }
     .contact-list a:hover{ color: var(--accent); }
 
-    .reveal{ opacity:0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    /* QA fix: essential content must never depend on JS/IntersectionObserver to become
+       visible (blank sections on fast scroll, anchor jumps, JS failure, or full-page
+       screenshots). Content now starts fully opaque and in place; only a subtle 14px
+       settle remains as the "reveal" motion, well under the 400-650ms preferred range.
+       This does NOT touch the hero, X-ray, marquees, or card/testimonial interactions —
+       none of those use this class. */
+    .reveal{ opacity:1; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
     .reveal.in-view{ opacity:1; transform:none; }
+    @media (prefers-reduced-motion: reduce){
+      .reveal{ transition:none; transform:none; }
+    }
 
     /* ===== BACK TO TOP ===== */
     .back-to-top{
@@ -476,7 +498,17 @@
       header.site-header nav{ gap: 10px !important; }
       header.site-header .nav-logo img{ width:44px !important; height:44px !important; }
       header.site-header .nav-links{ gap:14px !important; }
-      header.site-header .nav-links a{ font-size:11px !important; }
+      header.site-header .nav-links a{ font-size:11px !important; position:relative; }
+      /* QA fix: expand Home/About/Work tap targets to ~44x44px via an invisible
+         pseudo-element overlay (not padding/margin), so the visible text size, the
+         active/hover border-bottom underline position, and the header's height and
+         alignment are all completely unaffected. Mobile-only (max-width:600px) —
+         tablet and desktop headers are untouched. */
+      header.site-header .nav-links a::before{
+        content:"";
+        position:absolute;
+        top:-14.5px; bottom:-14.5px; left:-3px; right:-3px;
+      }
       header.site-header nav .btn.btn-solid{ padding: 6px !important; gap: 0 !important; }
       header.site-header nav .btn.btn-solid .cta-label{ display: none; }
     }
@@ -1169,9 +1201,9 @@
         <span class="section-eyebrow reveal"><span class="dot"></span>Stats &amp; Facts</span>
         <h2 class="section-title reveal">Two decades of creative direction, in numbers.</h2>
         <div class="stats-grid">
-          <div class="stat-block reveal"><div class="stat-num" data-count-to="20" data-suffix="+"><span>0</span></div><div class="stat-label">Years of Experience</div></div>
-          <div class="stat-block reveal"><div class="stat-num" data-count-to="200" data-suffix="+"><span>0</span></div><div class="stat-label">Projects Delivered</div></div>
-          <div class="stat-block reveal"><div class="stat-num" data-count-to="50" data-suffix="+"><span>0</span></div><div class="stat-label">Brands & Organizations</div></div>
+          <div class="stat-block reveal"><div class="stat-num" data-count-to="20" data-suffix="+"><span>20+</span></div><div class="stat-label">Years of Experience</div></div>
+          <div class="stat-block reveal"><div class="stat-num" data-count-to="200" data-suffix="+"><span>200+</span></div><div class="stat-label">Projects Delivered</div></div>
+          <div class="stat-block reveal"><div class="stat-num" data-count-to="50" data-suffix="+"><span>50+</span></div><div class="stat-label">Brands & Organizations</div></div>
         </div>
       </div>
     </section>

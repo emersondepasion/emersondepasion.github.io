@@ -120,8 +120,17 @@
       vertical-align:middle;
     }
 
-    .reveal{ opacity:0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    /* QA fix: same root cause as the "blank sections" issue site-wide — essential text
+       (bio paragraphs, discipline list) started fully invisible and only appeared once
+       IntersectionObserver fired, with a large 28px offset. On the About page specifically,
+       that large offset let an element still sliding into place visually overlap the
+       text below it before the transition finished. Content now starts fully opaque and
+       in its normal document-flow position; only a subtle 14px settle remains. */
+    .reveal{ opacity:1; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
     .reveal.in-view{ opacity:1; transform:none; }
+    @media (prefers-reduced-motion: reduce){
+      .reveal{ transition:none; transform:none; }
+    }
 
     .back-to-top{
       position: fixed; right: 32px; bottom: 32px; z-index: 40;
@@ -143,7 +152,17 @@
       header.site-header nav{ gap: 10px !important; }
       header.site-header .nav-logo img{ width:44px !important; height:44px !important; }
       header.site-header .nav-links{ gap:14px !important; }
-      header.site-header .nav-links a{ font-size:11px !important; }
+      header.site-header .nav-links a{ font-size:11px !important; position:relative; }
+      /* QA fix: expand Home/About/Work tap targets to ~44x44px via an invisible
+         pseudo-element overlay (not padding/margin), so the visible text size, the
+         active/hover border-bottom underline position, and the header's height and
+         alignment are all completely unaffected. Mobile-only (max-width:600px) —
+         tablet and desktop headers are untouched. */
+      header.site-header .nav-links a::before{
+        content:"";
+        position:absolute;
+        top:-14.5px; bottom:-14.5px; left:-3px; right:-3px;
+      }
       header.site-header nav .btn.btn-solid{ padding: 6px !important; gap: 0 !important; }
       header.site-header nav .btn.btn-solid .cta-label{ display: none; }
     }
