@@ -290,19 +290,26 @@
           '<p class="form-success-text">Your note has been sent in for review. It won\'t appear on the site unless approved — I\'ll take it from here.</p>';
       }
       let formHidden = false;
+      // Formspree's AJAX SDK (@formspree/ajax) shows/hides these boxes by
+      // toggling a `data-fs-active` attribute (not inline style) — that's
+      // the real signal, so we key our own "visible" state off of it.
+      function syncBox(box){
+        if(!box) return;
+        const isVisible = box.hasAttribute('data-fs-active');
+        box.classList.toggle('visible', isVisible);
+        if(box === successBox && isVisible && !formHidden && form){
+          formHidden = true;
+          form.style.display = 'none';
+          successBox.scrollIntoView({ behavior:'smooth', block:'center' });
+        }
+      }
       const observer = new MutationObserver(()=>{
-        [successBox, errorBox].forEach(box=>{
-          if(!box) return;
-          const isVisible = box.style.display !== 'none' && box.offsetParent !== null && box.textContent.trim() !== '';
-          box.classList.toggle('visible', isVisible);
-          if(box === successBox && isVisible && !formHidden && form){
-            formHidden = true;
-            form.style.display = 'none';
-            successBox.scrollIntoView({ behavior:'smooth', block:'center' });
-          }
-        });
+        [successBox, errorBox].forEach(syncBox);
       });
-      [successBox, errorBox].forEach(box=> box && observer.observe(box, { attributes:true, childList:true, attributeFilter:['style'] }));
+      [successBox, errorBox].forEach(box=> box && observer.observe(box, { attributes:true, attributeFilter:['data-fs-active','style'] }));
+      // Sync once on init too, in case a success/error state is already
+      // active before this script runs (e.g. a page restored from cache).
+      [successBox, errorBox].forEach(syncBox);
     })();
   </script>
   <script>
